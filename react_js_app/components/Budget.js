@@ -27,7 +27,7 @@ function Income_table(props){
       <table id="budget">
         <tr>
           <th>income</th>
-          <th>expected</th>
+          <th>estimated</th>
           <th>actual</th>
           <form name="tabledata">
             <label>

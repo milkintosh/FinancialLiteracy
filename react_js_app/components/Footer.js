@@ -2,8 +2,6 @@ import React from 'react';
 
 import '../App.css';
 import homeImg from '../home2.jpg'
-import Header from './Header';
-import Footer from './Footer';
 
 function RenderImage(props) {
       return (<div className="image"><img src={props.url} alt="picture"/>
@@ -22,16 +20,22 @@ function Link(props) {
   )
 }
 
-const home = () => {
+const Footer = () => {
     return (
       <div>
-        <Header/>
-        <RenderImage class = "homeImg" url={homeImg}/>
-        <Header1 name = "home"/>
-        <Link name = "Title that links to ??"/>
-        <Footer/>
+          <h1 class = "Footer">
+          <table border class = "footer">
+            <tr>
+                <td><a href = "/about">Reach UP</a></td>
+                <td><a class = "center" href = "/login">Reach IN</a></td>
+                <td><a href = "/contact">Reach OUT</a></td>
+            </tr>
+        </table>
+        </h1>
       </div>
     );
 } 
 
-export default home;
+export default Footer;
+
+
