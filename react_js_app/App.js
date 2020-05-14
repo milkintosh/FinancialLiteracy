@@ -24,9 +24,6 @@ import Contact from './components/Contact';
 import PrivateRoute from './components/PrivateRoute';
 
 class App extends React.Component {
-  componentDidMount () {
-    localStorage.removeItem("user");
-  }
   render() {
       return (
         <BrowserRouter>
