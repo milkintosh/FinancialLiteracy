@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, NavLink, Redirect } from 'react-router-dom';
+import {auth} from './components/Firebase/firebase';
+import swal from 'sweetalert2';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'font-awesome/css/font-awesome.min.css';
@@ -19,48 +21,35 @@ import Landing from './components/Landing';
 import About from './components/About';
 import Contact from './components/Contact';
 
-import FirebaseProvider, {UserContext}  from "./components/Firebase/context";
-
-const isLogin = () => {
-  if(localStorage.getItem("user"))
-    return true;
-  return false;
-}
-
- const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={(props) => (
-    isLogin
-      ? <Component {...props} />
-      : <Redirect to='/login' />
-  )} />
-)
+import PrivateRoute from './components/PrivateRoute';
 
 class App extends React.Component {
+  componentDidMount () {
+    localStorage.removeItem("user");
+  }
   render() {
-    return (
-      <FirebaseProvider>
-      <BrowserRouter>
-        <div>
-          <Switch>
-          <Route path="/" component={Landing} exact/> 
-            <Route path="/login" component={Login}/> 
-            <Route path="/signup" component={Signup}/> 
-            <Route path="/landing" component={Landing}/> 
-            <Route path="/about" component={About}/> 
-            <Route path="/contact" component={Contact}/>      
-            <PrivateRoute path="/home" component={Home}/>     
-            <PrivateRoute path="/account" component={Account}/> 
-            <PrivateRoute path="/budget" component={Budget}/>
-            <PrivateRoute path="/modules" component={Modules}/>
-            <PrivateRoute path="/partners" component={Partners}/>
-            <PrivateRoute path="/resources" component={Resource}/>
-            <PrivateRoute path="/webinars" component={Webinar}/>
-            <PrivateRoute path="/search" component={Search}/>
-          </Switch>
-        </div>
-      </BrowserRouter>
-      </FirebaseProvider>
-    );
+      return (
+        <BrowserRouter>
+          <div>
+            <Switch>
+            <Route path="/" component={Landing} exact/> 
+              <Route path="/login" component={Login}/> 
+              <Route path="/signup" component={Signup}/> 
+              <Route path="/landing" component={Landing}/> 
+              <Route path="/about" component={About}/> 
+              <Route path="/contact" component={Contact}/>      
+              <PrivateRoute path="/home" component={Home}/>     
+              <PrivateRoute path="/account" component={Account}/> 
+              <PrivateRoute path="/budget" component={Budget}/>
+              <PrivateRoute path="/modules" component={Modules}/>
+              <PrivateRoute path="/partners" component={Partners}/>
+              <PrivateRoute path="/resources" component={Resource}/>
+              <PrivateRoute path="/webinars" component={Webinar}/>
+              <PrivateRoute path="/search" component={Search}/>
+            </Switch>
+          </div>
+        </BrowserRouter>
+      );
   }
 }
 

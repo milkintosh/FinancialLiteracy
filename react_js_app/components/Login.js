@@ -76,6 +76,7 @@ function signIn(){
     }else{
         
         auth.signInWithEmailAndPassword(userSIEmail, userSIPassword).then((success) => {
+            localStorage.setItem("user", null);
             swal.fire({
                 type: 'successfull',
                 title: 'Succesfully signed in', 
@@ -216,7 +217,7 @@ function signOut(){
 class login extends React.Component {
 constructor(props) {
     super(props);
-    this.state = { email: '', password: '' };
+    this.state = { email: '', password: ''};
   }
 handleChange = ({target})=>  {
     this.setState({[target.name]: target.value});
