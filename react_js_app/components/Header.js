@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import '../App.css';
 import 'font-awesome/css/font-awesome.min.css';
 import Logo from '../Logo.png';
+import Signout from './Signout';
 
 
 class Header extends React.Component {
@@ -23,26 +24,23 @@ class Header extends React.Component {
             visibility: true});
         }
     }
-  
+  /*<a href="#home">reach up</a>
+          <a href="#resources">reach out</a>
+          <a href="#webinars">reach in</a>*/ //reach up reach out reach in are on a separate home screen that the user will be sent to by default if theyre not logged in
     render() {
       if(this.state.visibility) {
     return (
       <div class = "Menu">
         <button class="closebutton" onClick={this.toggleVisibility}><i class="fa fa-times" aria-hidden="true"></i></button>
         <header className="Header">
-          <img class = "logoImg" src={Logo} alt = "Logo image"></img>
-          <a href="#home">reach up</a>
-          <a href="#resources">reach out</a>
-          <a href="#webinars">reach in</a>
-          </header>
-          <header className="RightHeader">
-            <NavLink to="/">Home</NavLink>
+          <NavLink to="/home"><img class = "logoImg" src={Logo} alt = "Logo image"/></NavLink>
             <NavLink to="/resources">resources</NavLink>
             <NavLink to="/webinars">webinars</NavLink>
             <NavLink to="/modules">modules</NavLink>
             <NavLink to="/partners">partners</NavLink>
             <NavLink to="/budget">your budget</NavLink>
             <NavLink to="/account">your account</NavLink>
+            <Signout/>
           </header>
         </div>
       ); }
@@ -50,6 +48,7 @@ class Header extends React.Component {
       else {
         return (
           <header className="VisibleHeader">
+            <p style={{color:"transparent"}}>buffertocenter</p>
             <button class="threebars" onClick={this.toggleVisibility}>
               <i class="fa fa-bars" aria-hidden="true"></i></button>
               <h1 class="Site">up-RIGHT</h1>
@@ -59,6 +58,7 @@ class Header extends React.Component {
                   <button type="submit"><i class="fa fa-search" aria-hidden="false"></i></button>
                 </form>
               </div>
+              <Signout/>
           </header>
         );
       }

@@ -1,9 +1,8 @@
 import React from 'react';
 
 import '../App.css';
-import homeImg from '../home2.jpg'
+import homeImg from '../home.jpeg'
 import Header from './Header';
-import Footer from './Footer';
 
 function RenderImage(props) {
       return (<div className="image"><img src={props.url} alt="picture"/>
@@ -22,16 +21,22 @@ function Link(props) {
   )
 }
 
-const home = () => {
+const landing = () => {
     return (
       <div>
-        <Header/>
+        <h1 className="LandingHeader">up-RIGHT</h1>
         <RenderImage class = "homeImg" url={homeImg}/>
-        <Header1 name = "home"/>
-        <Link name = "Title that links to ??"/>
-        <Footer/>
+        <Header1 name = "TAGLINE"/>
+        <Link name = "Second tagline"/>
+        <table border class = "table">
+            <tr>
+                <td><a href = "/about">Reach UP</a></td>
+                <td><a href = "/login">Reach IN</a></td>
+                <td><a href = "/contact">Reach OUT</a></td>
+            </tr>
+        </table>
       </div>
     );
 } 
 
-export default home;
+export default landing;
