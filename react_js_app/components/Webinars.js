@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '../App.css';
-import webinarImg from '../john-schnobrich-2FPjlAyMQTA-unsplash.jpg'
+import webinarImg from '../webinars.jpg'
 import Header from './Header';
 
 function RenderImage(props) {

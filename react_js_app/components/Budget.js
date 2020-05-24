@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '../App.css';
-import budgetImg from '../tyler-franta-iusJ25iYu1c-unsplash.jpg'
+import budgetImg from '../budget.jpg'
 import Header from './Header';
 
 function RenderImage(props) {

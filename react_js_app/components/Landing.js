@@ -1,8 +1,9 @@
 import React from 'react';
 
 import '../App.css';
-import homeImg from '../home.jpeg'
-import Header from './Header';
+import homeImg from '../home.jpg'
+import LandingHeader from './LandingHeader';
+import Logo from '../Logo.png';
 
 function RenderImage(props) {
       return (<div className="image"><img src={props.url} alt="picture"/>
@@ -24,15 +25,17 @@ function Link(props) {
 const landing = () => {
     return (
       <div>
-        <h1 className="LandingHeader">up-RIGHT</h1>
-        <RenderImage class = "homeImg" url={homeImg}/>
-        <Header1 name = "TAGLINE"/>
-        <Link name = "Second tagline"/>
-        <table border class = "table">
+        <LandingHeader/>
+        <hr></hr>
+        <br/>
+        <Header1 name = "Let’s lift our knowledge up-RIGHT"/>
+        <Link name = "“An investment in knowledge, pays the best interest” – Benjamin Franklin"/>
+        <br/>
+        <table style = {{"width":"100%", "height":"600px"}} class = "table">
             <tr>
-                <td><a href = "/about">Reach UP</a></td>
-                <td><a href = "/login">Reach IN</a></td>
-                <td><a href = "/contact">Reach OUT</a></td>
+              <td style = {{"width":"33%"}} class = "login"><a style = {{"display":"block", "height":"600px"}} href = "/login">Reach IN -- <br/> Sign up</a></td>
+                <td style = {{"width":"33%"}}class = "about"><a style = {{"display":"block", "height":"600px"}} href = "/about">Reach UP -- <br/> About Us</a></td>
+                <td style = {{"width":"33%"}}class = "contact"><a style = {{"display":"block", "height":"600px"}} href = "/contact">Reach OUT -- <br/> Contact Us</a></td>
             </tr>
         </table>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '../App.css';
-import searchImg from '../anthony-martino-6AtQNsjMoJo-unsplash.jpg'
+import searchImg from '../search.jpg'
 import Header from './Header';
 
 function RenderImage(props) {

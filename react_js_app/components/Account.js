@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import accountImg from '../austin-distel-744oGeqpxPQ-unsplash.jpg'
+import accountImg from '../account.jpg'
 import Header from './Header';
 
 function RenderImage(props) {

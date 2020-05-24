@@ -6,8 +6,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import Logo from '../Logo.png';
 import Signout from './Signout';
 
-
-class Header extends React.Component {
+class LandingHeader extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -39,8 +38,7 @@ class Header extends React.Component {
             <NavLink to="/modules">modules</NavLink>
             <NavLink to="/partners">partners</NavLink>
             <NavLink to="/budget">your budget</NavLink>
-            <NavLink to="/account">your account</NavLink>
-            <Signout/>
+            <NavLink to="/login">your account</NavLink>
           </header>
         </div>
       ); }
@@ -58,11 +56,10 @@ class Header extends React.Component {
                   <button style = {{"margin-top":"10%"}} type="submit"><i class="fa fa-search" aria-hidden="false"></i></button>
                 </form>  
               </div>
-              <Signout/>
           </header>
         );
       }
     }
   }
 
-  export default Header;
+  export default LandingHeader;

@@ -37,7 +37,7 @@ class Signout extends React.Component {
       render() {
         return(
             <div>
-<button class="btn btn-outline-secondary text-uppercase" onClick = { () => {signOut()}}>
+<button style = {{"margin-top":"20%"}} class="btn btn-outline-secondary text-uppercase" onClick = { () => {signOut()}}>
                                 Sign Out<small></small></button>
                                 </div>
         );

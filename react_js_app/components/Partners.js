@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '../App.css';
-import partnersImg from '../perry-grone-lbLgFFlADrY-unsplash.jpg'
+import partnersImg from '../partners.jpg'
 import Header from './Header';
 
 function RenderImage(props) {
