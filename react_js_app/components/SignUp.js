@@ -1,7 +1,7 @@
 import swal from 'sweetalert2';
 import React from 'react';
 import home from '../home2.jpg'
-import {auth} from './Firebase/firebase'
+import {auth, firestore} from './Firebase/firebase'
 
 
 function checkUserFullName(){
@@ -100,9 +100,7 @@ function signUp(){
         }else if(checkUserPasswordValid == null){
             return checkUserPassword();
         }else{
-            
-            auth.createUserWithEmailAndPassword(userEmail, userPassword).then((success) => {
-                //  ask Ariana what this part is used for
+            //  ask Ariana what this part is used for
                 // var user = auth.currentUser;
                 //     var uid;
                 //     if (user != null) {
@@ -120,6 +118,75 @@ function signUp(){
                 //         userBio: "User biography",
                 //     }
                 //firebaseRef.child(uid).set(userData);
+            auth.createUserWithEmailAndPassword(userEmail, userPassword).then((success) => {
+                
+                firestore.collection("users").doc(auth.currentUser.uid).set({
+                    first: userFullName,
+                    last: userSurname,
+                    email:userEmail,
+                    wages: ["value", "value"],
+                    bonus: ["value", "value"],
+                    commission: ["value", "value"],
+                    reimbursements: ["value", "value"],
+                    "alimony income": ["value", "value"],
+                    "401k": ["value", "value"],
+                    medical: ["value", "value"],
+                    dental: ["value", "value"],
+                    vision: ["value", "value"],
+                    "health savings (hsa)": ["value", "value"],
+                    "emergency fund": ["value", "value"],
+                    investments: ["value", "value"],
+                    ira: ["value", "value"],
+                    vacation: ["value", "value"],
+                    gifts: ["value", "value"],
+                    groceries: ["value", "value"],
+                    "dining out": ["value", "value"],
+                    rent: ["value", "value"],
+                    "real estate": ["value", "value"],
+                    insurance: ["value", "value"],
+                    "home maintenance": ["value", "value"],
+                    security: ["value", "value"],
+                    water: ["value", "value"],
+                    gas: ["value", "value"],
+                    electric: ["value", "value"],
+                    sewer: ["value", "value"],
+                    trash: ["value", "value"],
+                    phone: ["value", "value"],
+                    internet: ["value", "value"],
+                    cable: ["value", "value"],
+                    "music and books": ["value", "value"],
+                    credit: ["value", "value"],
+                    "store cards": ["value", "value"],
+                    "student loans": ["value", "value"],
+                    "business expenses": ["value", "value"],
+                    "vet bills": ["value", "value"],
+                    "alimony debt": ["value", "value"],
+                    "auto payment": ["value", "value"],
+                    "auto insurance": ["value", "value"],
+                    gasoline: ["value", "value"],
+                    maintenance: ["value", "value"],
+                    "parking and tolls": ["value", "value"],
+                    clothing: ["value", "value"],
+                    laundry: ["value", "value"],
+                    vitamins: ["value", "value"],
+                    memberships: ["value", "value"],
+                    prescriptions: ["value", "value"],
+                    recreation: ["value", "value"],
+                    "hair and nails": ["value", "value"],
+                    term: ["value", "value"],
+                    permanent: ["value", "value"],
+                    "long-term care": ["value", "value"],
+                    "total income": ["value", "value"],
+                    "total expenses": ["value", "value"]
+                }, { merge: true 
+                })
+                .then(function(docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                })
+                .catch(function(error) {
+                    console.error("Error adding document: ", error);
+                });
+                
                 swal.fire('Your Account Created','Your account was created successfully, you can log in now.',
                 ).then((value) => {
                     setTimeout(function(){

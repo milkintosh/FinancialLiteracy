@@ -74,8 +74,8 @@ function signIn(){
     }else if(checkUserPasswordValid == null){
         return checkUserSIPassword();
     }else{
-        
         auth.signInWithEmailAndPassword(userSIEmail, userSIPassword).then((success) => {
+            localStorage.setItem("userId", auth.currentUser.uid);
             localStorage.setItem("user", null);
             swal.fire({
                 type: 'successfull',
@@ -100,49 +100,33 @@ function signIn(){
 }
 // xxxxxxxxxx Working For Profile Page xxxxxxxxxx
 // xxxxxxxxxx Get data from server and show in the page xxxxxxxxxx
-auth.onAuthStateChanged((user)=>{
-    if (user) {
-    //   User is signed in.
-        let user = auth.currentUser;
-        let uid
-        if(user != null){
-            uid = user.uid;
-        }
-        let firebaseRefKey = auth.database().ref().child(uid);
-        firebaseRefKey.on('value', (dataSnapShot)=>{
-            if(document.getElementById("userPfFullName") != null && document.getElementById("userPfSurname") != null && document.getElementById("userPfBio") != null) {
-                document.getElementById("userPfFullName").innerHTML = dataSnapShot.val().userFullName;
-                document.getElementById("userPfSurname").innerHTML = dataSnapShot.val().userSurname;
-                // userEmail = dataSnapShot.val().userEmail;
-                // userPassword = dataSnapShot.val().userPassword;
-                document.getElementById("userPfFb").setAttribute('href', dataSnapShot.val().userFb);
-                document.getElementById("userPfTw").setAttribute('href', dataSnapShot.val().userTw);
-                document.getElementById("userPfGp").setAttribute('href', dataSnapShot.val().userGp);
-                document.getElementById("userPfBio").innerHTML = dataSnapShot.val().userBio;
-            }
-        })
-    } else {
-    //   user is not signed in
-    }
+// auth.onAuthStateChanged((user)=>{
+//     if (user) {
+//     //   User is signed in.
+//         let user = auth.currentUser;
+//         let uid
+//         if(user != null){
+//             uid = user.uid;
+//         }
+//         let firebaseRefKey = auth.database().ref().child(uid);
+//         firebaseRefKey.on('value', (dataSnapShot)=>{
+//             if(document.getElementById("userPfFullName") != null && document.getElementById("userPfSurname") != null && document.getElementById("userPfBio") != null) {
+//                 document.getElementById("userPfFullName").innerHTML = dataSnapShot.val().userFullName;
+//                 document.getElementById("userPfSurname").innerHTML = dataSnapShot.val().userSurname;
+//                 // userEmail = dataSnapShot.val().userEmail;
+//                 // userPassword = dataSnapShot.val().userPassword;
+//                 document.getElementById("userPfFb").setAttribute('href', dataSnapShot.val().userFb);
+//                 document.getElementById("userPfTw").setAttribute('href', dataSnapShot.val().userTw);
+//                 document.getElementById("userPfGp").setAttribute('href', dataSnapShot.val().userGp);
+//                 document.getElementById("userPfBio").innerHTML = dataSnapShot.val().userBio;
+//             }
+//         })
+//     } else {
+//     //   user is not signed in
+//     }
     
-});
+// });
 // xxxxxxxxxx Show edit profile form with detail xxxxxxxxxx
-function showEditProfileForm(){
-    document.getElementById("profileSection").style.display = "none"
-    document.getElementById("editProfileForm").style.display = "block"
-    var userPfFullName = document.getElementById("userPfFullName").innerHTML;
-    var userPfSurname = document.getElementById("userPfSurname").innerHTML;
-    var userPfFb = document.getElementById("userPfFb").getAttribute("href");
-    var userPfTw = document.getElementById("userPfTw").getAttribute("href");
-    var userPfGp = document.getElementById("userPfGp").getAttribute("href");
-    var userPfBio = document.getElementById("userPfBio").innerHTML;
-    document.getElementById("userFullName").value = userPfFullName; 
-    document.getElementById("userSurname").value = userPfSurname; 
-    document.getElementById("userFacebook").value = userPfFb; 
-    document.getElementById("userTwitter").value = userPfTw; 
-    document.getElementById("userGooglePlus").value = userPfGp; 
-    document.getElementById("userBio").value = userPfBio; 
-}
 // xxxxxxxxxx Hide edit profile form xxxxxxxxxx
 function hideEditProfileForm(){
     document.getElementById("profileSection").style.display = "block";
@@ -191,29 +175,6 @@ function hideEditProfileForm(){
 //         });
 //     }
 // }
-// xxxxxxxxxx Working For Sign Out xxxxxxxxxx
-function signOut(){
-    auth.signOut().then(function() {
-        // Sign-out successful.
-        swal.fire({
-            type: 'successfull',
-            title: 'Signed Out', 
-        }).then((value) => {
-            setTimeout(function(){
-                window.location.replace("../index.html");
-            }, 1000)
-        });
-    }).catch(function(error) {
-        // An error happened.
-        let errorMessage = error.message;
-        swal.fire({
-            type: 'error',
-            title: 'Error',
-            text: "Error",
-        })
-    });
-}
-
 class login extends React.Component {
 constructor(props) {
     super(props);

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import List from './List';
-import webinars from '../webinars.jpg';
+import Post from './Forum'
+import bookImg from '../book_club.jpg'
 import Header from './Header';
 import Footer from './Footer';
 
@@ -16,16 +16,22 @@ function Header1(props) {
   )
 }
 
-const modules = () => {
+function Link(props) {
+  return (
+    <div className="links"><a href="#url/props.name??">{props.name}</a></div>
+  )
+}
+
+const book = () => {
     return (
       <div>
         <Header/>
-        <RenderImage class = "webinarsImg" url={webinars}/>
-        <Header1 name = "webinars"/>
-        <List/>
+        <RenderImage class = "bookImg" url={bookImg}/>
+        <Header1 name = "Book Club"/>
+        <Post/>
         <Footer/>
       </div>
     );
 } 
 
-export default modules;
+export default book;     

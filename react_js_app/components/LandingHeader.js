@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import '../App.css';
+
 import 'font-awesome/css/font-awesome.min.css';
 import Logo from '../Logo.png';
 import Signout from './Signout';
@@ -33,22 +33,27 @@ class LandingHeader extends React.Component {
         <button class="closebutton" onClick={this.toggleVisibility}><i class="fa fa-times" aria-hidden="true"></i></button>
         <header className="Header">
           <NavLink to="/home"><img class = "logoImg" src={Logo} alt = "Logo image"/></NavLink>
-            <NavLink to="/resources">resources</NavLink>
+          <NavLink to="/modules">modules</NavLink>
             <NavLink to="/webinars">webinars</NavLink>
-            <NavLink to="/modules">modules</NavLink>
-            <NavLink to="/partners">partners</NavLink>
             <NavLink to="/budget">your budget</NavLink>
-            <NavLink to="/login">your account</NavLink>
+            <NavLink to="/resources">resources</NavLink>
+            <NavLink to="/partners">partners</NavLink>
+            <NavLink to="/live">catch us live</NavLink>
+            <NavLink to="/book">book club</NavLink>
+            <NavLink to="/blog">blog</NavLink>
+            <NavLink to="/rewards">your rewards</NavLink>
+            <NavLink to="/account">your account</NavLink>
           </header>
         </div>
       ); }
   
       else {
         return (
-          <header className="VisibleHeader">
+          <header className="LandingHeader">
             <p style={{color:"transparent"}}>buffertocenter</p>
             <button class="threebars" onClick={this.toggleVisibility}>
               <i class="fa fa-bars" aria-hidden="true"></i></button>
+              <img style = {{"margin-top":".5%"}} class = "logoImg" src={Logo} alt = "Logo image"/>
               <h1 style = {{"margin-top":"0.5%"}} class="Site">up-RIGHT</h1>
               <div class="search-container">
                 <form action="/search">

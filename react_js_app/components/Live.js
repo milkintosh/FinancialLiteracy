@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import searchImg from '../search.jpg'
+import liveImg from '../home.jpg'
 import Header from './Header';
 import Footer from './Footer';
 
@@ -22,16 +22,19 @@ function Link(props) {
   )
 }
 
-const search = () => {
+const live = () => {
     return (
       <div>
         <Header/>
-        <RenderImage class = "searchImg" url={searchImg}/>
-        <Header1 name = "your account"/>
-        <Link name = "Title that links to ??"/>
+        <RenderImage class = "liveImg" url={liveImg}/>
+        <Header1 name = "Live Stream - Chat"/>
+        <Header1 name = "Come Join Us!"/>
+        <video src="https://www.youtube.com/watch?v=5yx6BWlEVcY" width="320" height="240" controls>
+          Your browser does not support the video tag.
+        </video> 
         <Footer/>
       </div>
     );
 } 
 
-export default search;
+export default live;     

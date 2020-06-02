@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../App.css';
+
 import homeImg from '../home2.jpg'
 
 function RenderImage(props) {
@@ -26,9 +26,9 @@ const Footer = () => {
           <h1 class = "Footer">
           <table border class = "footer">
             <tr>
-                <td><a href = "/about">Reach UP</a></td>
-                <td><a class = "center" href = "/login">Reach IN</a></td>
-                <td><a href = "/contact">Reach OUT</a></td>
+                <td><a title = "sign up"  href = "/login">Reach IN</a></td>
+                <td><a title = "about us" class = "center" href = "/about">Reach UP</a></td>
+                <td><a title = "contact us" href = "/contact">Reach OUT</a></td>
             </tr>
         </table>
         </h1>

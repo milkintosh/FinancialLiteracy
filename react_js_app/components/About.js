@@ -1,8 +1,9 @@
 import React from 'react';
 
-import '../App.css';
+
 import homeImg from '../home2.jpg'
-import Header from './Header';
+import Header from './LandingHeader';
+import Footer from './Footer';
 
 function RenderImage(props) {
       return (<div className="image"><img src={props.url} alt="picture"/>
@@ -24,8 +25,11 @@ function Link(props) {
 const home = () => {
     return (
       <div>
+        <Header/>
+        <hr></hr>
         <Header1 name = "About Us"/>
-        <Link name = "A paragraph about US"/>
+        <p> A paragraph about US</p>
+        <Footer/>
       </div>
     );
 } 

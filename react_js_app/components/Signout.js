@@ -7,6 +7,7 @@ function signOut(){
     auth.signOut().then(function() {
         // Sign-out successful.
         localStorage.removeItem("user");
+        localStorage.removeItem("userId");
         swal.fire({
             type: 'successfull',
             title: 'Signed Out', 

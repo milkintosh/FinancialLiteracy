@@ -1,7 +1,7 @@
 import React from 'react';
 
-
-import searchImg from '../search.jpg'
+import Post from './Forum'
+import blogImg from '../blog.jpg'
 import Header from './Header';
 import Footer from './Footer';
 
@@ -21,17 +21,17 @@ function Link(props) {
     <div className="links"><a href="#url/props.name??">{props.name}</a></div>
   )
 }
-
-const search = () => {
+// we can use this to display the information onto the screen or something...
+const blog = () => {
     return (
       <div>
         <Header/>
-        <RenderImage class = "searchImg" url={searchImg}/>
-        <Header1 name = "your account"/>
-        <Link name = "Title that links to ??"/>
+        <RenderImage class = "blogImg" url={blogImg}/>
+        <Header1 name = "Blog"/>
+        <Post/>
         <Footer/>
       </div>
     );
 } 
 
-export default search;
+export default blog;     

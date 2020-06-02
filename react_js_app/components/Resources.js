@@ -1,8 +1,9 @@
 import React from 'react';
 
-import '../App.css';
+import List from './List';
 import resourceImg from '../resources.jpg';
 import Header from './Header';
+import Footer from './Footer';
 
 function RenderImage(props) {
       return (<div className="image"><img src={props.url} alt="picture"/>
@@ -15,19 +16,14 @@ function Header1(props) {
   )
 }
 
-function Link(props) {
-  return (
-    <div className="links"><a href="#url/props.name??">{props.name}</a></div>
-  )
-}
-
 const resource = () => {
     return (
       <div>
         <Header/>
         <RenderImage class = "resourceImg" url={resourceImg}/>
         <Header1 name = "resources"/>
-        <Link name = "Title that links to resource"/>
+        <List/>
+        <Footer/>
       </div>
     );
 } 

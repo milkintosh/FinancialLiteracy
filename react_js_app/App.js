@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, NavLink, Redirect } from 'react-router-dom';
-import {auth} from './components/Firebase/firebase';
-import swal from 'sweetalert2';
+
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'font-awesome/css/font-awesome.min.css';
@@ -20,6 +19,10 @@ import Signup from './components/SignUp';
 import Landing from './components/Landing';
 import About from './components/About';
 import Contact from './components/Contact';
+import Book from './components/Book';
+import Blog from './components/Blog';
+import Live from './components/Live';
+import Rewards from './components/Rewards';
 
 import PrivateRoute from './components/PrivateRoute';
 
@@ -43,6 +46,10 @@ class App extends React.Component {
               <PrivateRoute path="/resources" component={Resource}/>
               <PrivateRoute path="/webinars" component={Webinar}/>
               <PrivateRoute path="/search" component={Search}/>
+              <PrivateRoute path="/blog" component={Blog}/>
+              <PrivateRoute path="/live" component={Live}/>
+              <PrivateRoute path="/book" component={Book}/>
+              <PrivateRoute path="/rewards" component={Rewards}/>
             </Switch>
           </div>
         </BrowserRouter>

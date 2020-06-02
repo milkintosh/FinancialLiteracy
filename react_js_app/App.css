@@ -20,6 +20,10 @@ body {
   font-size: medium;
   text-transform: lowercase;
 }
+p {
+  font-size: 24px;
+  text-align:center;
+}
 h1 {
   font-family: Georgia;
   text-transform: none;
@@ -38,7 +42,7 @@ img {
 .links {
   display:flex;
   justify-content: center;
-  font-size: x-large;
+  font-size: 48px;
   text-decoration: none;
 }
 input[type=submit] {
@@ -72,7 +76,7 @@ input[type=submit] {
 .Header a {
   color: #ff4f00;
   padding: 14px 30px;
-  padding-top: 50px;
+  padding-top: 20px;
   text-transform: lowercase;
   font-size: 24px;
   font-weight: bold;
@@ -98,7 +102,7 @@ input[type=submit] {
   font-size: x-large;
 }
 .VisibleHeader h1 {
-  margin-right: 300px;
+  margin-right: 400px;
   margin-left: 300px;
 }
 .VisibleHeader input[type=text] {
@@ -121,24 +125,28 @@ input[type=submit] {
   cursor:pointer;
   width: 150px;
 }
-a {
+body a {
   color: #2dd2f4;
   text-decoration: none;
 }
 a:hover {
   color: #98b4d4;
 }
-.table {
+.HomeTable {
   width:100%;
   height: 400px;
   margin-left: auto;
   margin-right: auto;
 }
-.table td {
+.HomeTable tr, .LandingTable tr {
+  box-shadow: 0px 0px 10px gray;
+  border-bottom: 0;
+}
+.HomeTable td, .LandingTable tr{
   text-align: center;
   font-size: 30px;
 }
-.table tr a {
+.HomeTable tr a, .LandingTable a{
   display:block;
   height:400px;
 }
@@ -157,28 +165,10 @@ a:hover {
 .contact {
   background-image: url('./reach_out.jpg');
 }
-.contact a{
+.resources a, .webinars a, .account a, .blog a, .live a, .contact a{
   color: #ff4f00;
 }
-.contact a:hover {
-  color: #964000;
-}
-.resources a{
-  color: #ff4f00;
-}
-.resources a:hover{
-  color: #964000;
-}
-.modules a{
-  color: #ff4f00;
-}
-.modules a:hover{
-  color: #964000;
-}
-.budget a{
-  color: #ff4f00;
-}
-.budget a:hover{
+.resources a:hover, .webinars a:hover, .account a:hover, .blog a:hover, .live a:hover, .contact a:hover{
   color: #964000;
 }
 
@@ -188,16 +178,76 @@ a:hover {
   text-align:center;
   font-size: 48px;
 }
+.LandingHeader {
+  display:flex;
+  justify-content: center;
+  font-size: x-large;
+}
+.LandingHeader h1 {
+  margin-right: 500px;
+  margin-left: 300px;
+}
+.LandingHeader input[type=text] {
+  background-color: #f5fcff;
+  font-size: large;
+  border: none;
+  width: 150px;
+}
+.LandingHeader .search-container button {
+  background-color: #f5fcff;
+  border:none;
+  cursor:pointer;
+  height:20px;
+  margin-top: 5%;
+}
 .Footer {
   display: flex;
   justify-content: center;
   text-align:center;
   font-size: 15px;
-  left: 0;
   bottom: 0;
   width: 100%;
 }
 .center {
-  margin-left: 300px;
-  margin-right: 300px;
+  margin-left:300px;
+  margin-right:300px;   
+}
+.table th, .table td{
+  color:#ff4f00;
+  width:33%;
+}
+.budget_table {
+  text-align:center;
+}
+.table td {
+  color:#2dd2f4;
+}
+.editProfileForm {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.element {
+  text-align:center;
+  font-size: 24px;
+  color:#ff4f00;
+}
+.element a{
+  text-decoration: underline dotted #ff4f00;
+}
+.input-form {
+  margin-left: auto;
+  margin-right: auto;
+  text-align:center;
+  font-size: 24px;
+  color:#ff4f00;
+}
+#forum {
+  width:100%;
+  text-align: center;
+  font-size: 24px;
+}
+#forum td {
+  box-shadow: 0px 0px 10px gray;
+  height: 200px;
 }
