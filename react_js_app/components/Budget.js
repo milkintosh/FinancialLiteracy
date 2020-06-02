@@ -42,7 +42,6 @@ var monthly;
 
 
 function onAfterSaveCell(row, cellName, cellValue) {
-  alert(`Save cell ${cellName} with value ${cellValue}`);
 
   var income = '';
   let estimated = '';
@@ -63,7 +62,6 @@ function onAfterSaveCell(row, cellName, cellValue) {
   docRef.get().then(function(doc) {
     if (doc.exists) {
   let item = doc.data();
-    alert(item[income]);
     item[income] = [estimated, actual];
     docRef.update(item);
     }
@@ -100,280 +98,280 @@ myData() {
           let item = doc.data();
           income = [{
             income: 'wages',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item["wages"][0],
+            actual: item["wages"][1]
           }, {
             income: 'bonus',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['bonus'][0],
+            actual: item['bonus'][1]
           },{
             income: 'commission',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['commission'][0],
+            actual: item['commission'][1]
           },{
             income: 'reimbursements',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['reimbursements'][0],
+            actual: item['reimbursements'][1]
           },{
             income: 'alimony income',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['alimony income'][0],
+            actual: item['alimony income'][1]
           }
           ];
           benefits = [{
             income: '401k',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['401k'][0],
+            actual: item['401k'][1]
           },
           {
             income: 'medical',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['medical'][0],
+            actual: item['medical'][1]
           },
           {
             income: 'dental',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['dental'][0],
+            actual: item['dental'][1]
           },
           {
             income: 'vision',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['dental'][0],
+            actual: item['dental'][1]
           },
           {
             income: 'health savings (hsa)',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['health savings (hsa)'][0],
+            actual: item['health savings (hsa)'][1]
           }
           ]
           savings = [{
             income: 'emergency fund',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['emergency fund'][0],
+            actual: item['emergency fund'][1]
           },
           {
             income: 'investments',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['investments'][0],
+            actual: item['investments'][1]
           },
           {
             income: 'ira',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['ira'][0],
+            actual: item['ira'][1]
           },
           {
             income: 'vacation',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['vacation'][0],
+            actual: item['vacation'][1]
           },
           {
             income: 'gifts',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['gifts'][0],
+            actual: item['gifts'][1]
           }
           ]
           food = [{
             income: 'groceries',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['groceries'][0],
+            actual: item['groceries'][1]
           },
           {
             income: 'dining out',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['dining out'][0],
+            actual: item['dining out'][1]
           }
           ]
           housing = [{
             income: 'rent',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['rent'][0],
+            actual: item['rent'][1]
           },
           {
             income: 'real estate',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['real estate'][0],
+            actual: item['real estate'][1]
           },
           {
             income: 'insurance',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['insurance'][0],
+            actual: item['insurance'][1]
           },
           {
             income: 'home maintenance',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['home maintenance'][0],
+            actual: item['home maintenance'][1]
           },
           {
             income: 'security',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['security'][0],
+            actual: item['security'][1]
           }
           ]
           utilities = [{
             income: 'water',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['water'][0],
+            actual: item['water'][1]
           },
           {
             income: 'gas',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['gas'][0],
+            actual: item['gas'][1]
           },
           {
             income: 'electric',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['electric'][0],
+            actual: item['electric'][1]
           },
           {
             income: 'sewer',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['sewer'][0],
+            actual: item['sewer'][1]
           },
           {
             income: 'trash',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['trash'][0],
+            actual: item['trash'][1]
           },
           {
             income: 'phone',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['phone'][0],
+            actual: item['phone'][1]
           },
           {
             income: 'internet',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['internet'][0],
+            actual: item['internet'][1]
           },
           {
             income: 'cable',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['cable'][0],
+            actual: item['cable'][1]
           },
           {
             income: 'music and books',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['music and books'][0],
+            actual: item['music and books'][1]
           }
           ]
           debts = [{
             income: 'credit',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['credit'][0],
+            actual: item['credit'][1]
           },
           {
             income: 'store cards',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['store cards'][0],
+            actual: item['store cards'][1]
           },
           {
             income: 'student loans',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['student loans'][0],
+            actual: item['student loans'][1]
           },
           {
             income: 'business expenses',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['business expenses'][0],
+            actual: item['business expenses'][1]
           },
           {
             income: 'vet bills',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['vet bills'][0],
+            actual: item['vet bills'][1]
           },
           {
             income: 'alimony debt',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['alimony debt'][0],
+            actual: item['alimony debt'][1]
           }
           ]
           transportation = [
           {
             income: 'auto payment',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['auto payment'][0],
+            actual: item['auto payment'][1]
           },
           {
             income: 'auto insurance',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['auto insurance'][0],
+            actual: item['auto insurance'][1]
           },
           {
             income: 'gasoline',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['gasoline'][0],
+            actual: item['gasoline'][1]
           },
           {
             income: 'maintenance',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['maintenance'][0],
+            actual: item['maintenance'][1]
           },
           {
             income: 'parking and tolls',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['parking and tolls'][0],
+            actual: item['parking and tolls'][1]
           }
           ]
           personal = [{
             income: 'clothing',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['clothing'][0],
+            actual: item['clothing'][1]
           },
           {
             income: 'laundry',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['laundry'][0],
+            actual: item['laundry'][1]
           },
           {
             income: 'vitamins',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['vitamins'][0],
+            actual: item['vitamins'][1]
           },
           {
             income: 'memberships',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['memberships'][0],
+            actual: item['memberships'][1]
           },
           {
             income: 'prescriptions',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['prescriptions'][0],
+            actual: item['prescriptions'][1]
           },
           {
             income: 'recreation',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['recreation'][0],
+            actual: item['recreation'][1]
           },
           {
             income: 'hair and nails',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['hair and nails'][0],
+            actual: item['hair and nails'][1]
           }
           ]
           lifeinsurance = [{
             income: 'term',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['term'][0],
+            actual: item['term'][1]
           },
           {
             income: 'permanent',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['permanent'][0],
+            actual: item['permanent'][1]
           },
           {
             income: 'long-term care',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['long-term care'][0],
+            actual: item['long-term care'][1]
           }
           ]
           monthly= [{
             income: 'total income',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['total income'][0],
+            actual: item['total income'][1]
           },
           {
             income: 'total expenses',
-            estimated: 'value',
-            actual: 'value'
+            estimated: item['total expenses'][0],
+            actual: item['total expenses'][1]
           }
           ]
       }
