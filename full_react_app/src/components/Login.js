@@ -188,16 +188,16 @@ handleChange = ({target})=>  {
 <body class="bg-light">
     <div class="container-fluid">
         <div class="row mx-1">
-            <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 text-center mt-5 pb-4 text-primary">
-            <h1 class="h1">welcome to up-RIGHT</h1>
+            <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 text-center mt-5 pb-4">
+            <h1 class="h1" style = {{"color":"#2dd2f4", "font-weight":"bold"}}>welcome to up-RIGHT</h1>
             </div>
-            <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 bg-white shadow mb-5 border border-primary">
+            <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 shadow mb-5 border">
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 p-4 bg-primary divCover">
+                    <div class="col-lg-6 col-md-6 p-4 divCover" style = {{"background-color":"#d8f3fa"}}>
                     <img src= {home} alt="Firebase cover image"/>
                     </div>
-                    <div class="col-lg-6 col-md-6 p-lg-5 p-md-5 px-3 py-4">
-                        <h2 class="h2 text-center text-dark mb-3">Sign In</h2>
+                    <div class="col-lg-6 col-md-6 p-lg-5 p-md-5 px-3 py-4" style = {{"background-color":"#f5fcff"}}>
+                        <h2 class="h2 text-center mb-3" style = {{"color":"#ff4f00", "font-weight":"bold"}}>Sign In</h2>
                         <div class="form-group">
                             <label for="userSIEmail">Email address<span class="text-danger ml-1">*</span></label>
                             <input name = "email" value = {this.state.email} type="email" class="form-control" id="userSIEmail" onBlur = {checkUserSIEmail()} placeholder="mail@mail.com" onChange = {this.handleChange}/>
@@ -208,8 +208,8 @@ handleChange = ({target})=>  {
                             <input name = "password" value = {this.state.password} type="password" class="form-control" id="userSIPassword" onBlur = {checkUserSIPassword()} placeholder="password" onChange = {this.handleChange}/>
                             <small id="userSIPasswordError" class="form-text text-danger">Please check your password.</small>
                         </div>
-                        <button class="btn btn-outline-primary text-uppercase mb-3" onClick = { () => {signIn()}}>Sign In</button>
-                        <p>Not a member? Let's get started: <a href="/signup"><strong class="text-primary text-uppercase showSignUpForm">Sign Up</strong></a></p>
+                        <button class="btn text-uppercase mb-3" onClick = { () => {signIn()}} style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}}>Sign In</button>
+                        <p>Not a member? Let's get started: <a href="/signup"><strong class="text-uppercase showSignUpForm" style = {{"color":"#2dd2f4"}}>Sign Up</strong></a></p>
                     </div>
                 </div>
             </div>

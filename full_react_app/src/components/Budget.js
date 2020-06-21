@@ -504,7 +504,6 @@ render (){
         <BootstrapTable data={ comment } cellEdit = {cellEditProp}>
           <TableHeaderColumn dataField='comment'>Your comments</TableHeaderColumn>
           <TableHeaderColumn dataField='admincomment' isKey>Responses</TableHeaderColumn>
-          
         </BootstrapTable>
         <br/>
         <br/> 

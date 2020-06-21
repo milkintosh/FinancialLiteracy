@@ -27,7 +27,6 @@ const account = () => {
         <RenderImage class = "resourceImg" url={accountImg}/>
         <Header1 name = "manage account"/>
         <div class="editProfileForm">
-            <h2 class="h2 text-center text-dark mb-3">Edit Profile</h2>
               <div class="form-group">
                 <label for="userFullName">Name<span class="text-danger ml-1"></span></label>
                 <input type="text" class="form-control" id="userFullName" onblur="checkUserFullName()" placeholder="Firma Adı"/>
@@ -42,7 +41,7 @@ const account = () => {
                   <input type="password" class="form-control" id="userSurname" onblur="checkUserSurname()" placeholder="*********"/>
               </div>
               <br/>
-              <button type="button" class="btn btn-outline-primary btn-block text-uppercase mb-3" onclick="saveProfile()">Save</button>
+              <button type="button" class="btn btn-block text-uppercase mb-3" onclick="saveProfile()" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}}>Save</button>
               <button type="button" class="btn btn-outline-secondary btn-block text-uppercase" onclick="hideEditProfileForm()">Cancel</button>
         </div>
         <br></br>
