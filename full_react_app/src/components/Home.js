@@ -1,19 +1,22 @@
 import React from 'react';
 
-
-import homeImg from '../home2.jpg'
-import resourceImg from '../resources.jpg';
-import webinarsImg from '../webinars.jpg';
-import modulesImg from '../Modules.jpg';
-import partnersImg from '../partners.jpg';
-import budgetImg from '../budget.jpg';
-import accountImg from '../account.jpg';
-import blogImg from '../blog.jpg';
-import liveImg from '../live_stream.jpg';
-import bookImg from '../book_club.jpg';
-import rewardsImg from '../rewards.jpg';
 import Header from './Header';
 import Footer from './Footer';
+
+import {storageRef} from './Firebase/firebase';
+
+var moduleRef = storageRef.child('Modules.jpg');
+var webinarRef = storageRef.child('webinars.jpg');
+var budgetRef = storageRef.child('budget.jpg');
+var resourceRef = storageRef.child('resources.jpg');
+var partnersRef = storageRef.child('partners.jpg');
+var liveRef = storageRef.child('live_stream.jpg');
+var bookRef = storageRef.child('book_club.jpg');
+var blogRef = storageRef.child('blog.jpg');
+var rewardsRef = storageRef.child('rewards.jpg');
+var accountRef = storageRef.child('account.jpg');
+var home2Ref = storageRef.child('home2.jpg');
+
 
 function RenderImage(props) {
       return (<div className="image"><img src={props.url} alt="picture"/>
@@ -26,17 +29,85 @@ function Header1(props) {
   )
 }
 
-function Link(props) {
-  return (
-    <div className="links"><a href="#url/props.name??">{props.name}</a></div>
-  )
-}
+class home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading:true,
+      homeImg:null,
+      resourceImg:null,
+      webinarsImg:null,
+      modulesImg:null,
+      partnersImg:null,
+      budgetImg:null,
+      accountImg:null,
+      blogImg:null,
+      liveImg:null,
+      bookImg:null,
+      rewardsImg:null
+    }
+  }
+  getData = () => {
+    return(
+      home2Ref.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({homeImg:url});    
+    }).then(
+    resourceRef.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({resourceImg:url});    
+    }).then(
+    webinarRef.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({webinarsImg:url});    
+    }).then(
+    moduleRef.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({modulesImg:url});    
+    }).then(
+    partnersRef.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({partnersImg:url});    
+    }).then(
+    budgetRef.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({budgetImg:url});    
+    }).then(
+    accountRef.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({accountImg:url});    
+    }).then(
+    blogRef.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({blogImg:url});    
+    }).then(
+    liveRef.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({liveImg:url});    
+    }).then(
+    bookRef.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({bookImg:url});    
+    }).then(
+    rewardsRef.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({rewardsImg:url});    
+    }))))))))))));
+  }
 
-const home = () => {
+  componentDidMount(){
+    this.setState({isLoading:true});
+    this.getData().then(() => {
+    this.setState({isLoading:false});
+    });
+  }
+
+  render() {
+    if(!this.state.isLoading) {
     return (
       <div>
         <Header/>
-        <RenderImage class = "homeImg" url={homeImg}/>
+        <RenderImage class = "homeImg" url={this.state.homeImg}/>
         <br></br>
         <Header1 name = "Let’s lift our knowledge up-RIGHT"/>
         <p>“An investment in knowledge, pays the best interest” – Benjamin Franklin"</p>
@@ -44,7 +115,7 @@ const home = () => {
         <div>
           <table class = "HomeTable">
             <tr class = "modules">
-                 <td><img src = {modulesImg} ></img></td>
+                 <td><img src = {this.state.modulesImg} ></img></td>
                   <td><a href = "/modules"><h1>modules</h1><br></br>
                    Our modules page contains a variety of valuable topics including financial 
                   institutions, loans, investing and retirement. Once you find a topic of interest, 
@@ -58,10 +129,10 @@ const home = () => {
                   how, and when to plan for your financial security. Our charismatic presenter will 
                   instill confidence as you move towards your own financial success.
                  </a></td>
-                 <td><img src = {webinarsImg} ></img></td>
+                 <td><img src = {this.state.webinarsImg} ></img></td>
                 </tr>
                 <tr class = "budget">
-                <td><img src = {budgetImg} ></img></td>
+                <td><img src = {this.state.budgetImg} ></img></td>
                   <td><a href = "/budget"><h1>your budget</h1><br></br>
                   Our various budgeting tools will accommodate all stages of your life, 
                   lifestyle, and finances. Once you create your budget based on your needs 
@@ -74,10 +145,10 @@ const home = () => {
                 great reads, websites, assessments and online calculators to help you in your 
                 journey. All tools have been tested and used by the up-RIGHT family and will 
                 provide insight on many essential financial topics.</a></td>
-                <td><img src = {resourceImg} ></img></td>
+                <td><img src = {this.state.resourceImg} ></img></td>
                </tr>
                 <tr class = "partners">
-                  <td><img src = {partnersImg} ></img></td>
+                  <td><img src = {this.state.partnersImg} ></img></td>
                   <td><a href = "/partners"><h1>partners</h1><br></br>
                   Our Partner Programs give you an opportunity to learn more about the businesses 
                   that align with our core values and think would benefit you. Just click on their 
@@ -89,10 +160,10 @@ const home = () => {
                    we want you to be able to have real conversations with us! Our live stream/chat sessions
                     allow for real time streaming where we can see, talk, share, and experience the power 
                     of reaching into our up-RIGHT community.</a></td>
-                    <td><img src = {liveImg} ></img></td>
+                    <td><img src = {this.state.liveImg} ></img></td>
                 </tr>
                 <tr class = "book">
-                  <td><img src = {bookImg} ></img></td>
+                  <td><img src = {this.state.bookImg} ></img></td>
                   <td><a href = "/book"><h1>book club</h1>
                   Bell Hooks once said, “For some people, what is so painful about reading, is that you 
                   read something, and you don’t have anyone to share it with.” Not only does our book club 
@@ -107,10 +178,10 @@ const home = () => {
                    relevant topics and skills needed to achieve financial success. Jump in anytime 
                    to see what is trending in our financial literacy space. We welcome your perspective 
                    and appreciate you sharing your experiences with our up-RIGHT community.</a></td>
-                   <td><img src = {blogImg} ></img></td>
+                   <td><img src = {this.state.blogImg} ></img></td>
                 </tr>
                 <tr class = "rewards">
-                  <td><img src = {rewardsImg} ></img></td>
+                  <td><img src = {this.state.rewardsImg} ></img></td>
                   <td><a href = "/rewards"><h1>your rewards</h1><br></br>
                   By participating in our programs and utilizing our tools, you will automatically be 
                   enrolled in and earn points within our up-RIGHT rewards program. </a></td>
@@ -121,13 +192,18 @@ const home = () => {
                   your experience on our site to meet your needs. When you manage your account, 
                   you can change your profile, settings, update your passwords, and even get 
                   individualized support! Up-RIGHT is about you, for you! </a></td>
-                  <td><img src = {accountImg} ></img></td>
+                  <td><img src = {this.state.accountImg} ></img></td>
                 </tr>
           </table>
         </div>
         <Footer/>
       </div>
     );
+    }
+    else {
+      return (<p>loading</p>);
+    }
+  }
 } 
 
 export default home;

@@ -1,9 +1,12 @@
 import React from 'react';
 
 import Post from './Forum'
-import blogImg from '../blog.jpg'
 import Header from './Header';
 import Footer from './Footer';
+
+import {storageRef} from './Firebase/firebase';
+
+var blogRef = storageRef.child('blog.jpg');
 
 function RenderImage(props) {
       return (<div className="image"><img src={props.url} alt="picture"/>
@@ -16,22 +19,45 @@ function Header1(props) {
   )
 }
 
-function Link(props) {
-  return (
-    <div className="links"><a href="#url/props.name??">{props.name}</a></div>
-  )
-}
-// we can use this to display the information onto the screen or something...
-const blog = () => {
-    return (
+class blog extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading:true,
+      blogImg:null
+    }
+  }
+  getData = () => {
+    return blogRef.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({blogImg:url});    
+    }).catch(function(error) {
+          console.log("error occurred");
+      });
+  }
+
+  componentDidMount(){
+    this.setState({isLoading:true});
+    this.getData().then(() => {
+    this.setState({isLoading:false});
+    });
+  }
+
+  render() {
+    if(!this.state.isLoading) {
+      return (
       <div>
         <Header/>
-        <RenderImage class = "blogImg" url={blogImg}/>
+        <RenderImage class = "blogImg" url={this.state.blogImg}/>
         <Header1 name = "Blog"/>
         <Post page="blog"/>
         <Footer/>
       </div>
-    );
+    );}
+    else {
+      return (<p>loading</p>);
+    }
+  }
 } 
 
 export default blog;     

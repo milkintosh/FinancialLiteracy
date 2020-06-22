@@ -1,9 +1,12 @@
 import React from 'react';
 
 import Post from './Forum'
-import bookImg from '../book_club.jpg'
 import Header from './Header';
 import Footer from './Footer';
+
+import {storageRef} from './Firebase/firebase';
+
+var bookRef = storageRef.child('book_club.jpg');
 
 function RenderImage(props) {
       return (<div className="image"><img src={props.url} alt="picture"/>
@@ -16,22 +19,45 @@ function Header1(props) {
   )
 }
 
-function Link(props) {
-  return (
-    <div className="links"><a href="#url/props.name??">{props.name}</a></div>
-  )
-}
+class book extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading:true,
+      bookImg:null
+    }
+  }
+  getData = () => {
+    return bookRef.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({bookImg:url});    
+    }).catch(function(error) {
+          console.log("error occurred");
+      });
+  }
 
-const book = () => {
-    return (
-      <div>
-        <Header/>
-        <RenderImage class = "bookImg" url={bookImg}/>
-        <Header1 name = "Book Club"/>
-        <Post page="bookClub"/>
-        <Footer/>
-      </div>
-    );
+  componentDidMount(){
+    this.setState({isLoading:true});
+    this.getData().then(() => {
+    this.setState({isLoading:false});
+    });
+  }
+
+  render() {
+    if(!this.state.isLoading) {
+      return (
+        <div>
+          <Header/>
+          <RenderImage class = "bookImg" url={this.state.bookImg}/>
+          <Header1 name = "Book Club"/>
+          <Post page="bookClub"/>
+          <Footer/>
+        </div>
+      );}
+    else {
+      return (<p>loading</p>);
+    }
+  }
 } 
 
 export default book;     

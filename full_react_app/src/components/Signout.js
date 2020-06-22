@@ -28,13 +28,6 @@ function signOut(){
 }
 
 class Signout extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = { email: '', password: '' };
-    //   }
-    // handleChange = ({target})=>  {
-    //     this.setState({[target.name]: target.value});
-    // };
       render() {
         return(
             <div>

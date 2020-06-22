@@ -1,11 +1,12 @@
 import React from 'react';
 import swal from 'sweetalert2';
 
-import budgetImg from '../budget.jpg'
 import Header from './Header';
 import Footer from './Footer';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
-import {firestore} from './Firebase/firebase';
+import {firestore, storageRef} from './Firebase/firebase';
+
+var budgetRef = storageRef.child('budget.jpg');
 
 if(localStorage.getItem("userId") != null) {
 var docRef = firestore.collection('users').doc(localStorage.getItem("userId"));
@@ -105,8 +106,8 @@ class Budget extends React.Component {
         userDoc: firestore.collection("users"),
         users:[],
         userId: 'nothing',
+        budgetImg:null
       }
-      this.myData = this.myData.bind(this)
   }
   myData = () => {
     var ref;
@@ -477,11 +478,21 @@ class Budget extends React.Component {
     });
   }
 
+getImg = () => {
+  return budgetRef.getDownloadURL().then(url => {
+    // Insert url into an <img> tag to "download"
+    this.setState({budgetImg:url});    
+  }).catch(function(error) {
+        console.log("error occurred");
+    });
+}
+
 componentDidMount(){
   this.setState({isLoading:true});
   this.myData().then(() => {
+  this.getImg().then(() => {
   this.setState({isLoading:false});
-  });
+  });});
 }
 
 updateUser = (id) => {
@@ -498,7 +509,7 @@ render (){
     return (
       <div>
         <Header/>
-        <RenderImage class = "budgetImg" url={budgetImg}/>
+        <RenderImage class = "budgetImg" url={this.state.budgetImg}/>
         <Header1 name = "your budget"/>
         <p> any comments or concerns about your budget? We will try to respond to you promptly.</p>
         <BootstrapTable data={ comment } cellEdit = {cellEditProp}>
@@ -513,7 +524,7 @@ render (){
     
   }
     else if(!this.state.admin) {
-      return (<p>loading</p>)
+      return (<p>loading</p>);
     }
     else {
       const users = [];
@@ -526,7 +537,7 @@ render (){
         return (
           <div>
             <Header/>
-            <RenderImage class = "budgetImg" url={budgetImg}/>
+            <RenderImage class = "budgetImg" url={this.state.budgetImg}/>
             <p>admin page, select a user</p>
             {users}
           </div>
@@ -536,7 +547,7 @@ render (){
         return (
           <div>
             <Header/>
-            <RenderImage class = "budgetImg" url={budgetImg}/>
+            <RenderImage class = "budgetImg" url={this.state.budgetImg}/>
             <p>admin page</p>
             <div class = "budget_table">
               <BootstrapTable data={ comment } cellEdit = {cellEditProp}>

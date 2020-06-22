@@ -3,18 +3,23 @@ import { NavLink } from 'react-router-dom';
 
 
 import 'font-awesome/css/font-awesome.min.css';
-import Logo from '../Logo.png';
 import Signout from './Signout';
+
+import {storageRef} from './Firebase/firebase';
+
+var logoRef = storageRef.child('Logo.png');
 
 class LandingHeader extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        visibility: false
+        visibility: false,
+        isLoading:true,
+        Logo:null
       };
-      this.toggleVisibility=this.toggleVisibility.bind(this);
     }
-    toggleVisibility () {
+
+    toggleVisibility = () => {
       if (this.state.visibility){
         this.setState ({ 
           visibility: false });
@@ -23,29 +28,45 @@ class LandingHeader extends React.Component {
             visibility: true});
         }
     }
+
+    getData = () => {
+      return logoRef.getDownloadURL().then(url => {
+        // Insert url into an <img> tag to "download"
+        this.setState({Logo:url});    
+      }).catch(function(error) {
+            console.log("error occurred");
+        });
+    }
+  
+    componentDidMount(){
+      this.setState({isLoading:true});
+      this.getData().then(() => {
+      this.setState({isLoading:false});
+      });
+    }
   /*<a href="#home">reach up</a>
           <a href="#resources">reach out</a>
           <a href="#webinars">reach in</a>*/ //reach up reach out reach in are on a separate home screen that the user will be sent to by default if theyre not logged in
     render() {
       if(this.state.visibility) {
-    return (
-      <div class = "Menu">
-        <button class="closebutton" onClick={this.toggleVisibility}><i class="fa fa-times" aria-hidden="true"></i></button>
-        <header className="Header">
-          <NavLink to="/home"><img class = "logoImg" src={Logo} alt = "Logo image"/></NavLink>
-          <NavLink to="/modules">modules</NavLink>
-            <NavLink to="/webinars">webinars</NavLink>
-            <NavLink to="/budget">your budget</NavLink>
-            <NavLink to="/resources">resources</NavLink>
-            <NavLink to="/partners">partners</NavLink>
-            <NavLink to="/live">catch us live</NavLink>
-            <NavLink to="/book">book club</NavLink>
-            <NavLink to="/blog">blog</NavLink>
-            <NavLink to="/rewards">your rewards</NavLink>
-            <NavLink to="/account">your account</NavLink>
-          </header>
-        </div>
-      ); }
+        return (
+          <div class = "Menu">
+            <button class="closebutton" onClick={this.toggleVisibility}><i class="fa fa-times" aria-hidden="true"></i></button>
+            <header className="Header">
+              <NavLink to="/home"><img class = "logoImg" src={this.state.Logo}/></NavLink>
+              <NavLink to="/modules">modules</NavLink>
+                <NavLink to="/webinars">webinars</NavLink>
+                <NavLink to="/budget">your budget</NavLink>
+                <NavLink to="/resources">resources</NavLink>
+                <NavLink to="/partners">partners</NavLink>
+                <NavLink to="/live">catch us live</NavLink>
+                <NavLink to="/book">book club</NavLink>
+                <NavLink to="/blog">blog</NavLink>
+                <NavLink to="/rewards">your rewards</NavLink>
+                <NavLink to="/account">your account</NavLink>
+              </header>
+            </div>
+          ); }
   
       else {
         return (
@@ -53,7 +74,7 @@ class LandingHeader extends React.Component {
             <p style={{color:"transparent"}}>buffertocenter</p>
             <button class="threebars" onClick={this.toggleVisibility}>
               <i class="fa fa-bars" aria-hidden="true"></i></button>
-              <img style = {{"margin-top":".5%"}} class = "logoImg" src={Logo} alt = "Logo image"/>
+              <img style = {{"margin-top":".5%"}} class = "logoImg" src={this.state.Logo}/>
               <h1 style = {{"margin-top":"0.5%"}} class="Site">up-RIGHT</h1>
               <div class="search-container">
                 <form action="/search">

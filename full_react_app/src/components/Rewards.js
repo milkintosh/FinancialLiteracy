@@ -1,9 +1,11 @@
 import React from 'react';
 
-
-import rewardsImg from '../rewards.jpg'
 import Header from './Header';
 import Footer from './Footer';
+
+import {storageRef} from './Firebase/firebase';
+
+var rewardsRef = storageRef.child('rewards.jpg');
 
 function RenderImage(props) {
       return (<div className="image"><img src={props.url} alt="picture"/>
@@ -22,11 +24,36 @@ function Link(props) {
   )
 }
 
-const rewards = () => {
+class rewards extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading:true,
+      rewardsImg:null
+    }
+  }
+  getData = () => {
+    return rewardsRef.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({rewardsImg:url});    
+    }).catch(function(error) {
+          console.log("error occurred");
+      });
+  }
+
+  componentDidMount(){
+    this.setState({isLoading:true});
+    this.getData().then(() => {
+    this.setState({isLoading:false});
+    });
+  }
+
+  render() {
+    if(!this.state.isLoading) {
     return (
       <div>
         <Header/>
-        <RenderImage class = "rewardsImg" url={rewardsImg}/>
+        <RenderImage class = "rewardsImg" url={this.state.rewardsImg}/>
         <Header1 name = "my rewards"/>
         <div class="container-fluid">
         <div class="row mx-1">
@@ -46,6 +73,11 @@ const rewards = () => {
         <Footer/>
       </div>
     );
+  }
+  else {
+    return (<p>loading</p>);
+  }
+}
 } 
 
 export default rewards;     

@@ -1,8 +1,10 @@
 import swal from 'sweetalert2';
 import React from 'react';
-import home from '../home2.jpg'
-import {auth, firestore} from './Firebase/firebase'
+import {auth, firestore} from './Firebase/firebase';
 
+import {storageRef} from './Firebase/firebase';
+
+var signUpRef = storageRef.child('home2.jpg');
 
 function checkUserFullName(){
     var userSurname = document.getElementById("userFullName");
@@ -213,12 +215,30 @@ function signUp(){
 class signup extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { name: '', surname: '' };
+        this.state = { name: '', surname: '', isLoading:true,
+        home:null
       }
+    }
+    getData = () => {
+      return signUpRef.getDownloadURL().then(url => {
+        // Insert url into an <img> tag to "download"
+        this.setState({home:url});    
+      }).catch(function(error) {
+            console.log("error occurred");
+        });
+    }
+  
+    componentDidMount(){
+      this.setState({isLoading:true});
+      this.getData().then(() => {
+      this.setState({isLoading:false});
+      });
+    }
     handleChange = ({target})=>  {
         this.setState({[target.name]: target.value});
     };
     render() {
+        if(!this.state.isLoading) {
         return(
         <body class="bg-light">
             <div class="container-fluid">
@@ -229,7 +249,7 @@ class signup extends React.Component {
                     <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 bg-white shadow mb-5 border border-primary">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 p-4 bg-primary divCover">
-                                <img src= {home} alt="picture of kids"/>
+                                <img src= {this.state.home} alt="picture of kids"/>
                             </div>
                             <div class="col-lg-6 col-md-6 p-lg-5 p-md-5 px-3 py-4">
                                 <div id="signUpForm">
@@ -264,6 +284,10 @@ class signup extends React.Component {
             </div>
             </body>
             );
+        }
+        else {
+            return (<p>loading</p>);
+          }
         }
 }
 

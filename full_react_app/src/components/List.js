@@ -9,8 +9,8 @@ class List extends React.Component {
       isLoading:true,
       modules:[],
       docRef: firestore.collection(props.page)
+    }
   }
-}
 getData = () => {
     return this.state.docRef.get().then(querySnap => {
       const data = querySnap.docs.map(doc => doc.data());

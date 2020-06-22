@@ -3,19 +3,23 @@ import { NavLink } from 'react-router-dom';
 
 
 import 'font-awesome/css/font-awesome.min.css';
-import Logo from '../Logo.png';
 import Signout from './Signout';
 
+import {storageRef} from './Firebase/firebase';
+
+var logoRef = storageRef.child('Logo.png');
 
 class Header extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        visibility: false
+        visibility: false,
+        isLoading:true,
+        Logo:null
       };
-      this.toggleVisibility=this.toggleVisibility.bind(this);
     }
-    toggleVisibility () {
+
+    toggleVisibility = () => {
       if (this.state.visibility){
         this.setState ({ 
           visibility: false });
@@ -23,6 +27,22 @@ class Header extends React.Component {
           this.setState ({ 
             visibility: true});
         }
+    }
+
+    getData = () => {
+      return logoRef.getDownloadURL().then(url => {
+        // Insert url into an <img> tag to "download"
+        this.setState({Logo:url});    
+      }).catch(function(error) {
+            console.log("error occurred");
+        });
+    }
+  
+    componentDidMount(){
+      this.setState({isLoading:true});
+      this.getData().then(() => {
+      this.setState({isLoading:false});
+      });
     }
   /*<a href="#home">reach up</a>
           <a href="#resources">reach out</a>
@@ -33,7 +53,7 @@ class Header extends React.Component {
       <div class = "Menu">
         <button class="closebutton" onClick={this.toggleVisibility}><i class="fa fa-times" aria-hidden="true"></i></button>
         <header className="Header">
-          <NavLink to="/home"><img class = "logoImg" src={Logo} alt = "Logo image"/></NavLink>
+          <NavLink to="/home"><img class = "logoImg" src={this.state.Logo}/></NavLink>
             <NavLink to="/modules">modules</NavLink>
             <NavLink to="/webinars">webinars</NavLink>
             <NavLink to="/budget">your budget</NavLink>
@@ -56,7 +76,7 @@ class Header extends React.Component {
             <p style={{color:"transparent"}}>buffertocenter</p>
             <button className="threebars" onClick={this.toggleVisibility}>
               <i className="fa fa-bars" aria-hidden="true"></i></button>
-              <img style = {{"margin-top":".5%"}} className = "logoImg" src={Logo} alt = "Logo image"/>
+              <img style = {{"margin-top":".5%"}} className = "logoImg" src={this.state.Logo}/>
               <div>
               <h1 style = {{"margin-top":"2%"}} className="Site">up-RIGHT</h1>
               </div>

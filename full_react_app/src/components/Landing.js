@@ -1,13 +1,14 @@
 import React from 'react';
 
-
-import homeImg from '../home.jpg'
 import LandingHeader from './LandingHeader';
-import Logo from '../Logo.png';
+
+import {storageRef} from './Firebase/firebase';
+
+var homeRef = storageRef.child('home2.jpg');
 
 function RenderImage(props) {
-      return (<div className="image"><img src={props.url} alt="picture"/>
-      </div>);
+  return (<div className="image"><img src={props.url} alt="picture"/>
+  </div>);
 }
 
 function Header1(props) {
@@ -16,18 +17,37 @@ function Header1(props) {
   )
 }
 
-function Link(props) {
-  return (
-    <div className="links"><a href="#url/props.name??">{props.name}</a></div>
-  )
-}
+class landing extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading:true,
+      homeImg:null
+    }
+  }
+  getData = () => {
+    return homeRef.getDownloadURL().then(url => {
+      // Insert url into an <img> tag to "download"
+      this.setState({homeImg:url});    
+    }).catch(function(error) {
+          console.log("error occurred");
+      });
+  }
 
-const landing = () => {
-    return (
+  componentDidMount(){
+    this.setState({isLoading:true});
+    this.getData().then(() => {
+    this.setState({isLoading:false});
+    });
+  }
+
+  render() {
+    if(!this.state.isLoading) {
+      return (
       <div>
         <LandingHeader/>
         <hr></hr>
-        <br/>
+        <RenderImage class = "bookImg" url={this.state.homeImg}/>
         <Header1 name = "Let’s lift our knowledge up-RIGHT"/>
         <p>“An investment in knowledge, pays the best interest” – Benjamin Franklin"</p>
         <br/>
@@ -40,6 +60,11 @@ const landing = () => {
         </table>
       </div>
     );
+    }
+    else {
+      return (<p>loading</p>);
+    }
+  }
 } 
 
 export default landing;
