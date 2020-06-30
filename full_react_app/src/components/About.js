@@ -27,8 +27,6 @@ function Link(props) {
   )
 }
 
-
-
 class about extends React.Component {
   constructor(props) {
     super();
@@ -81,10 +79,17 @@ class about extends React.Component {
 
   componentDidMount(){
     this.setState({isLoading:true});
-    this.myData().then(() => {
-    this.getText().then(() => {
-    this.setState({isLoading:false});
-    });});
+    if(localStorage.getItem("userId") != null) {
+      this.myData().then(() => {
+      this.getText().then(() => {
+      this.setState({isLoading:false});
+      });});
+    }
+    else {
+      this.getText().then(() => {
+      this.setState({isLoading:false});
+      });
+    }
   }
 
   render () {
