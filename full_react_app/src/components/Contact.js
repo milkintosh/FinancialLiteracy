@@ -117,14 +117,21 @@ class contact extends React.Component {
             <p>{this.state.email}<br></br>
             {this.state.phone}</p>
           
+          <div class = "listinput">
+          <label>Edit "Contact Us" Information: </label><br/>
           <label>email</label>
-          <input name = "email" type = "text" onChange={this.handleChange}></input>
+          <input class="form-control" name = "email" type = "text" onChange={this.handleChange}></input>
 
           <label>phone</label>
-          <input name = "phone" type = "text" onChange={this.handleChange}></input>
+          <input class="form-control" name = "phone" type = "text" onChange={this.handleChange}></input><br/>
 
-          <button onClick = { () => {this.updateContact()} }></button>
+          <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick = { () => {this.updateContact()} }>upload!</button>
+          </div>
+
+          <div  style = {{"position":"fixed", "bottom":"0", "width":"100%", "margin-left":"auto", "margin-right":"auto"}}>
           <Footer/>
+          </div>
+
         </div>
       );
     }

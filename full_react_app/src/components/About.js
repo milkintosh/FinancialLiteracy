@@ -112,9 +112,16 @@ class about extends React.Component {
           <Header1 name = "About Us"/>
           <p> {this.state.text}</p>
           
-          <textarea onChange={this.handleChange}></textarea>
-          <button onClick = { () => {this.updateAbout()} }></button>
+          <div class = "listinput">
+          <label>Edit About Text: </label>
+          <textarea class="form-control" onChange={this.handleChange}></textarea><br/>
+          <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick = { () => {this.updateAbout()} }>upload!</button>
+          </div>
+
+          <div  style = {{"position":"fixed", "bottom":"0", "width":"100%", "margin-left":"auto", "margin-right":"auto"}}>
           <Footer/>
+          </div>
+
         </div>
       );
     }

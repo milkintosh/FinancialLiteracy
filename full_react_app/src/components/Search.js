@@ -3,7 +3,11 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 
-import {storageRef} from './Firebase/firebase';
+import {firestore, storageRef} from './Firebase/firebase';
+
+if(localStorage.getItem("userId") != null) {
+  var docRef = firestore.collection('users').doc(localStorage.getItem("userId"));
+}
 
 var searchRef = storageRef.child('search.jpg');
 
@@ -29,9 +33,27 @@ class search extends React.Component {
     super(props);
     this.state = {
       isLoading:true,
-      searchImg:null
+      searchImg:null,
+      admin:false,
+      url:null,
+      picture:null
     }
   }
+
+  getAdmin = () => {
+    return docRef.get().then(doc => {
+      if (doc.exists) {
+        let item = doc.data();
+        if(item["admin"] == null) {
+          this.setState({admin:false});
+        }
+        else {
+          this.setState({admin:true});
+        }
+      }
+    });
+  }
+
   getData = () => {
     return searchRef.getDownloadURL().then(url => {
       // Insert url into an <img> tag to "download"
@@ -39,6 +61,18 @@ class search extends React.Component {
     }).catch(function(error) {
           console.log("error occurred");
       });
+  }
+
+  onChange = (e) => {
+    this.setState({picture : e.target.files});
+  }
+
+  uploadHandler = () => {
+    console.log(this.state.picture[0]);
+    var file = new File(this.state.picture, "search.jpg");
+    searchRef.put(file).then(function(snapshot) {
+      window.location.reload();
+    });
   }
 
   componentDidMount(){
@@ -53,6 +87,13 @@ class search extends React.Component {
     return (
       <div>
         <Header/>
+
+        <div class = "imageinput">
+        <label>Edit "Search" Picture: </label><br/>
+        <input type = "file" onChange = {this.onChange}/>
+        <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.uploadHandler}>Upload!</button>
+        </div>
+
         <RenderImage class = "searchImg" url={this.state.searchImg}/>
         <Header1 name = "your account"/>
         <Link name = "Title that links to ??"/>

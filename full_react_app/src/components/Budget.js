@@ -97,6 +97,22 @@ const cellEditProp = {
   afterSaveCell: onAfterSaveCell  // a hook for after saving cell
 };
 
+// componentDidMount(){
+//   this.setState({isLoading:true});
+//   if(localStorage.getItem("userId") != null) {
+//     this.getData().then(() => {
+//     this.getAdmin().then(() => {
+//     this.setState({isLoading:false});
+//     });});
+//   }
+//   else {
+//     this.getData().then(() => {
+//     this.setState({isLoading:false});
+//     });
+//   }
+// }
+
+
 class Budget extends React.Component {
   constructor(props) {
       super();
@@ -106,7 +122,9 @@ class Budget extends React.Component {
         userDoc: firestore.collection("users"),
         users:[],
         userId: 'nothing',
-        budgetImg:null
+        budgetImg:null,
+        url:null,
+        picture:null,
       }
   }
   myData = () => {
@@ -464,7 +482,7 @@ class Budget extends React.Component {
             querySnap.forEach(entry => {
               var doc = entry.data();
               if(doc["admin"] == null)
-              this.setState({users:[...this.state.users,{id:entry.id, name:doc["first"]}]});
+              this.setState({users:[...this.state.users,{id:entry.id, name:String(doc["first"] + " " + doc["last"])}]});
             });
             console.log(this.state.users);
             this.state.admin=true;
@@ -487,14 +505,6 @@ getImg = () => {
     });
 }
 
-componentDidMount(){
-  this.setState({isLoading:true});
-  this.myData().then(() => {
-  this.getImg().then(() => {
-  this.setState({isLoading:false});
-  });});
-}
-
 updateUser = (id) => {
   this.state.userId = id;
   this.setState({isLoading:true});
@@ -503,9 +513,34 @@ updateUser = (id) => {
   });
 }
 
+resetUser = () => {
+  this.setState({userId:"nothing"});
+}
+
+onChange = (e) => {
+  this.setState({picture : e.target.files});
+}
+
+uploadHandler = () => {
+  console.log(this.state.picture[0]);
+  var file = new File(this.state.picture, "budget.jpg");
+  budgetRef.put(file).then(function(snapshot) {
+    window.location.reload();
+  });
+}
+
+componentDidMount = () => {
+  this.setState({isLoading:true});
+  this.myData().then(() => {
+  this.getImg().then(() => {
+  this.setState({isLoading:false});
+  });});
+}
+
+
+
 render (){
   if(!this.state.isLoading && !this.state.admin) {
-   
     return (
       <div>
         <Header/>
@@ -523,45 +558,55 @@ render (){
     );
     
   }
-    else if(!this.state.admin) {
-      return (<p>loading</p>);
+  else if(!this.state.admin) {
+    return (<p>loading</p>);
+  }
+  else {
+    const users = [];
+    this.state.users.forEach(item => {
+      users.push(<div style = {{"display": "flex", "justify-content": "center"}}><button  
+        class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick = {() => {this.updateUser(item["id"])}}>
+          {item["name"]}</button><br></br></div>);
+    });
+    if(this.state.userId == 'nothing') {
+      return (
+        <div>
+          <Header/>
+
+          <div class = "imageinput">
+          <label>Edit "Budget" Picture: </label><br/>
+          <input type = "file" onChange = {this.onChange}/>
+          <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.uploadHandler}>Upload!</button>
+          </div>
+
+          <RenderImage class = "budgetImg" url={this.state.budgetImg}/>
+          <p>admin page, select a user</p>
+          {users}
+        </div>
+      )
     }
     else {
-      const users = [];
-      this.state.users.forEach(item => {
-        users.push(<div style = {{"display": "flex", "justify-content": "center"}}><button  
-          class="btn btn-outline-primary text-uppercase mb-3" onClick = {() => {this.updateUser(item["id"])}}>
-            {item["name"]}</button><br></br></div>);
-      });
-      if(this.state.userId == 'nothing') {
-        return (
-          <div>
-            <Header/>
-            <RenderImage class = "budgetImg" url={this.state.budgetImg}/>
-            <p>admin page, select a user</p>
-            {users}
+      return (
+        <div>
+          <Header/>
+          <RenderImage class = "budgetImg" url={this.state.budgetImg}/>
+          <p>admin page</p>
+          <div style = {{"display": "flex", "justify-content": "center"}}>
+          <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick = { () => {this.resetUser()}} >Go back to user list</button>
           </div>
-        )
-      }
-      else {
-        return (
-          <div>
-            <Header/>
-            <RenderImage class = "budgetImg" url={this.state.budgetImg}/>
-            <p>admin page</p>
-            <div class = "budget_table">
-              <BootstrapTable data={ comment } cellEdit = {cellEditProp}>
-                <TableHeaderColumn dataField='comment'isKey>Their comments</TableHeaderColumn>
-                <TableHeaderColumn dataField='admincomment' >Your comments</TableHeaderColumn>
-              </BootstrapTable>
-            <br/>
-            </div> 
-            {this.print_tables()}
-          </div>
-        )
-      }
+          <div class = "budget_table">
+            <BootstrapTable data={ comment } cellEdit = {cellEditProp}>
+              <TableHeaderColumn dataField='comment'isKey>Their comments</TableHeaderColumn>
+              <TableHeaderColumn dataField='admincomment' >Your comments</TableHeaderColumn>
+            </BootstrapTable>
+          <br/>
+          </div> 
+          {this.user_tables()}
+        </div>
+      )
     }
   }
+}
   print_tables() {
     return (
       <div>
@@ -637,6 +682,92 @@ render (){
         </BootstrapTable>
         <br></br>
         <BootstrapTable data={ monthly } cellEdit = {cellEditProp}>
+          <TableHeaderColumn dataField='income' isKey>Monthly Cash flow</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+        </BootstrapTable>
+        <br></br>
+        </div>
+        <Footer/>
+      </div>
+    );
+  }
+  user_tables() {
+    return (
+      <div>
+        <div class = "budget_table">
+        <BootstrapTable data={ income }>
+          <TableHeaderColumn dataField='income' isKey>Income</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+        </BootstrapTable>
+        <br></br>
+        <BootstrapTable data={ benefits }>
+          <TableHeaderColumn dataField='income' isKey>Benefits</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+        </BootstrapTable>
+        <br></br>
+        <BootstrapTable data={ savings }>
+          <TableHeaderColumn dataField='income' isKey>Savings</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+        </BootstrapTable>
+        <br></br>
+        <BootstrapTable data={ food }>
+          <TableHeaderColumn dataField='income' isKey>Food</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+        </BootstrapTable>
+        <br></br>
+        <BootstrapTable data={ housing }>
+          <TableHeaderColumn dataField='income' isKey>Housing</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+        </BootstrapTable>
+        <br></br>
+        <BootstrapTable data={ utilities }>
+          <TableHeaderColumn dataField='income' isKey>Utilities</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+        </BootstrapTable>
+        <br></br>
+        <BootstrapTable data={ debts }>
+          <TableHeaderColumn dataField='income' isKey>Debt</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+        </BootstrapTable>
+        <br></br>
+        <BootstrapTable data={ transportation }>
+          <TableHeaderColumn dataField='income' isKey>Transportation</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+        </BootstrapTable>
+        <br></br>
+        <BootstrapTable data={ personal }>
+          <TableHeaderColumn dataField='income' isKey>Personal</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+        </BootstrapTable>
+        <br></br>
+        <BootstrapTable data={ lifeinsurance }>
+          <TableHeaderColumn dataField='income' isKey>Life Insurance</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+        </BootstrapTable>
+        <br></br>
+        <BootstrapTable data={ monthly }>
           <TableHeaderColumn dataField='income' isKey>Monthly Cash flow</TableHeaderColumn>
           <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
           <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>

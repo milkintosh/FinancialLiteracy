@@ -13,6 +13,8 @@ if(localStorage.getItem("userId") != null) {
 
 var resourceRef = storageRef.child('resources.jpg');
 
+var cloud = firestore.collection('resources');
+
 function RenderImage(props) {
       return (<div className="image"><img src={props.url} alt = {props.alt}/>
       </div>);
@@ -32,14 +34,12 @@ class resource extends React.Component {
       admin:false,
       resourceImg:null,
       url:null,
-      picture:null
+      picture:null,
+      desc:null,
+      item:null,
+      link:null,
     }
   }
-
-  handleChange = (e) => {
-    this.setState({url:e.target.value});
-  }
-
   getAdmin = () => {
     return docRef.get().then(doc => {
       if (doc.exists) {
@@ -71,27 +71,31 @@ class resource extends React.Component {
     console.log(this.state.picture[0]);
     var file = new File(this.state.picture, "resources.jpg");
     resourceRef.put(file).then(function(snapshot) {
-      swal.fire({
-        type: 'success',
-        title: 'File successfully uploaded', 
-        text: 'refresh the page to see your changes',
-      });
+      window.location.reload();
+    });
+  }
+
+  onTextChange = (e) => {
+    this.setState({[e.target.name] : e.target.value});
+  }
+
+  uploadTextHandler = () => {
+    console.log("hello");
+    cloud.doc(String(this.state.item)).set({
+    desc: String(this.state.desc),
+    item: String(this.state.item),
+    link: String(this.state.link),
+    }).then(() => {
+      window.location.reload();
     });
   }
 
   componentDidMount(){
     this.setState({isLoading:true});
-    if(localStorage.getItem("userId") != null) {
-      this.getData().then(() => {
-      this.getAdmin().then(() => {
-      this.setState({isLoading:false});
-      });});
-    }
-    else {
-      this.getData().then(() => {
-      this.setState({isLoading:false});
-      });
-    }
+    this.getData().then(() => {
+    this.getAdmin().then(() => {
+    this.setState({isLoading:false});
+    });});
   }
 
   render() {
@@ -107,28 +111,36 @@ class resource extends React.Component {
       );
     }
     else if(!this.state.isLoading && this.state.admin) {
-      if(this.state.picture) {
-        return (
-          <div>
-            <Header/>
-            <RenderImage class = "resourceImg" url={this.state.picture} alt = {this.state.picture}/>
-            <Header1 name = "resources"/>
-            <List page = "resources"/>
-    
-            <input type = "file" onChange = {this.onChange}/>
-            <button onClick={this.uploadHandler}>Upload!</button>
-          </div>
-          );
-      }
       return (
       <div>
         <Header/>
+
+        <div class = "imageinput">
+        <label>Edit "Resources" Picture: </label><br/>
+        <input type = "file" onChange = {this.onChange}/>
+        <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.uploadHandler}>Upload!</button>
+        </div>
+
         <RenderImage class = "resourceImg" url={this.state.resourceImg}/>
         <Header1 name = "resources"/>
-        <List page = "resources"/>
 
-        <input type = "file" onChange = {this.onChange}/>
-        <button onClick={this.uploadHandler}>Upload!</button>
+        <div class = "listinput">
+        <label>Add a Resource: </label><br/>
+          <label>item</label>
+          <input class="form-control" name = "item" type = "text" onChange = {this.onTextChange}/>
+          <br/>
+
+          <label>description</label>
+          <input class="form-control" name = "desc" type = "text" onChange = {this.onTextChange}/>
+          <br/>
+          
+          <label>link</label>
+          <input class="form-control" name = "link" type = "textarea" onChange = {this.onTextChange}/>
+          <br/>
+          <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.uploadTextHandler}>Upload!</button>
+        </div>
+
+        <List page = "resources"/>
         <Footer/>
       </div>
       );
