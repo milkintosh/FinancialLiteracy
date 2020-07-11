@@ -243,17 +243,17 @@ class signup extends React.Component {
         <body class="bg-light">
             <div class="container-fluid">
                 <div class="row mx-1">
-                    <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 text-center mt-5 pb-4 text-primary">
-                        <h1 class="h1">welcome to upright</h1>
+                    <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 text-center mt-5 pb-4">
+                        <h1 class="h1">welcome to up-RIGHT</h1>
                     </div>
-                    <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 bg-white shadow mb-5 border border-primary">
+                    <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 bg-white shadow mb-5 border">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 p-4 bg-primary divCover">
+                            <div class="col-lg-6 col-md-6 p-4 divCover" style = {{"background-color":"#d8f3fa"}}>
                                 <img src= {this.state.home} alt="picture of kids"/>
                             </div>
-                            <div class="col-lg-6 col-md-6 p-lg-5 p-md-5 px-3 py-4">
+                            <div class="col-lg-6 col-md-6 p-lg-5 p-md-5 px-3 py-4" style = {{"background-color":"#f5fcff"}}>
                                 <div id="signUpForm">
-                                    <h2 class="h2 text-center text-dark mb-3">Sign Up</h2>
+                                    <h2 class="h2 text-center mb-3" style = {{"color":"#ff4f00", "font-weight":"bold"}}>Sign Up</h2>
                                     <div class="form-group">
                                         <label for="userFullName">Name<span class="text-danger ml-1">*</span></label>
                                         <input type="text" name = "name" value = {this.state.name} class="form-control" id="userFullName" onblur={checkUserFullName()} placeholder="name" onChange = {this.handleChange}/>
@@ -272,10 +272,10 @@ class signup extends React.Component {
                                     <div class="form-group">
                                         <label for="userPassword">Password<span class="text-danger ml-1">*</span></label>
                                         <input type="password" name = "password" value = {this.state.password} class="form-control" id="userPassword" onblur={checkUserPassword()} placeholder="**********" onChange = {this.handleChange}/>
-                                        <small id="userPasswordError" class="form-text text-danger">Your password must be uppercase, lowercase and more than 10 characters.</small>
+                                        <small id="userPasswordError" class="form-text text-danger">Your password must be uppercase, lowercase, more than 10 characters, with a number.</small>
                                     </div>
-                                    <button class="btn btn-outline-primary text-uppercase mb-3" onClick = {() => {signUp()}}> Sign Up </button>
-                                    <p>Already a member? Sign in: <a href="/login"><strong class="text-primary text-uppercase showSignInForm">Sign In</strong></a></p>
+                                    <button class="btn text-uppercase mb-3" onClick = {() => {signUp()}} style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}}> Sign Up </button>
+                                    <p>Already a member? Sign in: <a href="/login"><strong class="text-uppercase showSignInForm" style = {{"color":"#2dd2f4"}}>Sign In</strong></a></p>
                                 </div>
                             </div>
                         </div>

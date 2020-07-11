@@ -46,7 +46,9 @@ class about extends React.Component {
       if (doc.exists) {
         let item = doc.data();
         item['words'] = this.state.text;
-        aboutRef.update(item);
+        aboutRef.update(item).then (() => {
+          window.location.reload();
+        });
       }
       else {
         alert("item doesn't exist");
@@ -100,7 +102,9 @@ class about extends React.Component {
         <hr></hr>
         <Header1 name = "About Us"/>
       <p> {this.state.text} </p>
-        <Footer/>
+      <div  style = {{"position":"fixed", "bottom":"0", "width":"100%", "margin-left":"auto", "margin-right":"auto"}}>
+          <Footer/>
+          </div>
       </div>
       );
     }

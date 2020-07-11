@@ -79,7 +79,6 @@ class modules extends React.Component {
   }
 
   uploadTextHandler = () => {
-    console.log("hello");
     cloud.doc(String(this.state.item)).set({
     desc: String(this.state.desc),
     item: String(this.state.item),

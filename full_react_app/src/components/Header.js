@@ -167,7 +167,7 @@ class Header extends React.Component {
             <p style={{color:"transparent"}}>buffertocenter</p>
             <button className="threebars" onClick={this.toggleVisibility}>
               <i className="fa fa-bars" aria-hidden="true"></i></button>
-              <img style = {{"margin-top":".5%"}} className = "logoImg" src={this.state.Logo}/>
+              <NavLink to="/home"><img style = {{"margin-top":".5%"}} className = "logoImg" src={this.state.Logo}/></NavLink>
               <div>
               <h1 style = {{"margin-top":"2%"}} className="Site">up-RIGHT</h1>
               </div>

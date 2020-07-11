@@ -95,8 +95,7 @@ class search extends React.Component {
         </div>
 
         <RenderImage class = "searchImg" url={this.state.searchImg}/>
-        <Header1 name = "your account"/>
-        <Link name = "Title that links to ??"/>
+        <Header1 name = "search results"/>
         <Footer/>
       </div>
     );

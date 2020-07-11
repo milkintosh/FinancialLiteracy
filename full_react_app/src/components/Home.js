@@ -9,6 +9,20 @@ if(localStorage.getItem("userId") != null) {
   var docRef = firestore.collection('users').doc(localStorage.getItem("userId"));
 }
 
+var homeRef = firestore.collection('home');
+
+var moduleText = homeRef.doc("modules");
+var webinarText = homeRef.doc("webinars");
+var budgetText = homeRef.doc("budget");
+var resourceText = homeRef.doc("resources");
+var partnersText = homeRef.doc("partners");
+var liveText = homeRef.doc("live");
+var bookText = homeRef.doc("book");
+var blogText = homeRef.doc("blog");
+var rewardsText = homeRef.doc("rewards");
+var accountText = homeRef.doc("account");
+var taglineText = homeRef.doc("tagline");
+
 var moduleRef = storageRef.child('Modules.jpg');
 var webinarRef = storageRef.child('webinars.jpg');
 var budgetRef = storageRef.child('budget.jpg');
@@ -68,7 +82,7 @@ class home extends React.Component {
     });
   }
 
-  getData = () => {
+  getPics = () => {
     return(
       home2Ref.getDownloadURL().then(url => {
       // Insert url into an <img> tag to "download"
@@ -116,24 +130,261 @@ class home extends React.Component {
     }))))))))))));
   }
 
+  getText = () => {
+    return(
+      taglineText.get().then(doc => {
+        let item = doc.data();
+      // Insert url into an <img> tag to "download"
+      this.setState({tagTitle:item["title"]});    
+      this.setState({tagText:item["quote"]});  
+    }).then(
+    resourceText.get().then(doc => {
+      let item = doc.data();
+      // Insert url into an <img> tag to "download"
+      this.setState({resourceDesc:item["text"]});    
+    }).then(
+    webinarText.get().then(doc => {
+      let item = doc.data();
+      // Insert url into an <img> tag to "download"
+      this.setState({webinarDesc:item["text"]});    
+    }).then(
+    moduleText.get().then(doc => {
+      let item = doc.data();
+      // Insert url into an <img> tag to "download"
+      this.setState({moduleDesc:item["text"]});    
+    }).then(
+    partnersText.get().then(doc => {
+      let item = doc.data();
+      // Insert url into an <img> tag to "download"
+      this.setState({partnersDesc:item["text"]});    
+    }).then(
+    budgetText.get().then(doc => {
+      let item = doc.data();
+      // Insert url into an <img> tag to "download"
+      this.setState({budgetDesc:item["text"]});    
+    }).then(
+    accountText.get().then(doc => {
+      let item = doc.data();
+      // Insert url into an <img> tag to "download"
+      this.setState({accountDesc:item["text"]});    
+    }).then(
+    blogText.get().then(doc => {
+      let item = doc.data();
+      // Insert url into an <img> tag to "download"
+      this.setState({blogDesc:item["text"]});    
+    }).then(
+    liveText.get().then(doc => {
+      let item = doc.data();
+      // Insert url into an <img> tag to "download"
+      this.setState({liveDesc:item["text"]});    
+    }).then(
+    bookText.get().then(doc => {
+      let item = doc.data();
+      // Insert url into an <img> tag to "download"
+      this.setState({bookDesc:item["text"]});    
+    }).then(
+    rewardsText.get().then(doc => {
+      let item = doc.data();
+      // Insert url into an <img> tag to "download"
+      this.setState({rewardsDesc:item["text"]});    
+    }))))))))))));
+  }
+
   onChange = (e) => {
-    this.setState({picture : e.target.files});
+    this.setState({[e.target.name] : e.target.files});
   }
 
   uploadHandler = () => {
-    console.log(this.state.picture[0]);
-    var file = new File(this.state.picture, "Logo.png");
+    var file = new File(this.state.logo, "Logo.png");
     logoRef.put(file).then(function(snapshot) {
       window.location.reload();
     });
   }
 
+  homeUploadHandler = () => {
+    var file = new File(this.state.picture, "home2.jpg");
+    home2Ref.put(file).then(function(snapshot) {
+      window.location.reload();
+    });
+  }
+
+  onTextChange = (e) => {
+    this.setState({[e.target.name] : e.target.value});
+  }
+
+  TagUploadHandler = () => {
+    return taglineText.get().then(doc => {
+      if (doc.exists) {
+        let item = doc.data();
+        item['title'] = this.state.tagTitle;
+        item['quote'] = this.state.tagText;
+        taglineText.update(item).then (() => {
+          window.location.reload();
+        });
+      }
+      else {
+        alert("item doesn't exist");
+      }
+    });
+  }
+
+  ModuleUploadHandler = () => {
+    return moduleText.get().then(doc => {
+      if (doc.exists) {
+        let item = doc.data();
+        item['text'] = this.state.moduleDesc;
+        moduleText.update(item).then (() => {
+          window.location.reload();
+        });
+      }
+      else {
+        alert("item doesn't exist");
+      }
+    });
+  }
+
+  WebinarUploadHandler = () => {
+    return webinarText.get().then(doc => {
+      if (doc.exists) {
+        let item = doc.data();
+        item['text'] = this.state.webinarDesc;
+        webinarText.update(item).then (() => {
+          window.location.reload();
+        });
+      }
+      else {
+        alert("item doesn't exist");
+      }
+    });
+  }
+
+  BudgetUploadHandler = () => {
+    return budgetText.get().then(doc => {
+      if (doc.exists) {
+        let item = doc.data();
+        item['text'] = this.state.budgetDesc;
+        budgetText.update(item).then (() => {
+          window.location.reload();
+        });
+      }
+      else {
+        alert("item doesn't exist");
+      }
+    });
+  }
+
+  ResourceUploadHandler = () => {
+    return resourceText.get().then(doc => {
+      if (doc.exists) {
+        let item = doc.data();
+        item['text'] = this.state.resourceDesc;
+        resourceText.update(item).then (() => {
+          window.location.reload();
+        });
+      }
+      else {
+        alert("item doesn't exist");
+      }
+    });
+  }
+
+  PartnersUploadHandler = () => {
+    return partnersText.get().then(doc => {
+      if (doc.exists) {
+        let item = doc.data();
+        item['text'] = this.state.partnersDesc;
+        partnersText.update(item).then (() => {
+          window.location.reload();
+        });
+      }
+      else {
+        alert("item doesn't exist");
+      }
+    });
+  }
+
+  LiveUploadHandler = () => {
+    return liveText.get().then(doc => {
+      if (doc.exists) {
+        let item = doc.data();
+        item['text'] = this.state.liveDesc;
+        liveText.update(item).then (() => {
+          window.location.reload();
+        });
+      }
+      else {
+        alert("item doesn't exist");
+      }
+    });
+  }
+
+  BookUploadHandler = () => {
+    return bookText.get().then(doc => {
+      if (doc.exists) {
+        let item = doc.data();
+        item['text'] = this.state.bookDesc;
+        bookText.update(item).then (() => {
+          window.location.reload();
+        });
+      }
+      else {
+        alert("item doesn't exist");
+      }
+    });
+  }
+
+  BlogUploadHandler = () => {
+    return blogText.get().then(doc => {
+      if (doc.exists) {
+        let item = doc.data();
+        item['text'] = this.state.blogDesc;
+        blogText.update(item).then (() => {
+          window.location.reload();
+        });
+      }
+      else {
+        alert("item doesn't exist");
+      }
+    });
+  }
+
+  RewardsUploadHandler = () => {
+    return rewardsText.get().then(doc => {
+      if (doc.exists) {
+        let item = doc.data();
+        item['text'] = this.state.rewardsDesc;
+        rewardsText.update(item).then (() => {
+          window.location.reload();
+        });
+      }
+      else {
+        alert("item doesn't exist");
+      }
+    });
+  }
+
+  AccountUploadHandler = () => {
+    return accountText.get().then(doc => {
+      if (doc.exists) {
+        let item = doc.data();
+        item['text'] = this.state.accountDesc;
+        accountText.update(item).then (() => {
+          window.location.reload();
+        });
+      }
+      else {
+        alert("item doesn't exist");
+      }
+    });
+  }
+
   componentDidMount(){
     this.setState({isLoading:true});
-    this.getData().then(() => {
+    this.getPics().then(() => {
+    this.getText().then(() => {
     this.getAdmin().then(() => {
     this.setState({isLoading:false});
-    });});
+    });});});
   }
 
   render() {
@@ -143,93 +394,12 @@ class home extends React.Component {
             <Header/>
             <RenderImage class = "homeImg" url={this.state.homeImg}/>
             <br></br>
-            <Header1 name = "Let’s lift our knowledge up-RIGHT"/>
-            <p>“An investment in knowledge, pays the best interest” – Benjamin Franklin"</p>
+            <Header1 name = {this.state.tagTitle}/>
+            <p>{this.state.tagText}</p>
             <br></br>
-            <div>
-              <table class = "HomeTable">
-                <tr class = "modules">
-                     <td><img src = {this.state.modulesImg} ></img></td>
-                      <td><a href = "/modules"><h1>modules</h1><br></br>
-                       Our modules page contains a variety of valuable topics including financial 
-                      institutions, loans, investing and retirement. Once you find a topic of interest, 
-                      just click and access the subject that you would like to explore. We cannot wait 
-                      to share the information created in our up-RIGHT lab.</a></td>
-                    </tr>
-                    <tr class = "webinars">
-                      <td><a href = "/webinars"><h1>webinars</h1><br></br>
-                      Don’t let the stress of planning your financial future make your stomach turn. 
-                      Engage in our online presentations at your own convenience. Let us show you what, 
-                      how, and when to plan for your financial security. Our charismatic presenter will 
-                      instill confidence as you move towards your own financial success.
-                     </a></td>
-                     <td><img src = {this.state.webinarsImg} ></img></td>
-                    </tr>
-                    <tr class = "budget">
-                    <td><img src = {this.state.budgetImg} ></img></td>
-                      <td><a href = "/budget"><h1>your budget</h1><br></br>
-                      Our various budgeting tools will accommodate all stages of your life, 
-                      lifestyle, and finances. Once you create your budget based on your needs 
-                      and wants,  you can upload it and receive tips from our financial team!</a></td>
-                    </tr>
-                  <tr class = "resources">
-                    <td style = {{"width":"50%"}}><a href = "/resources"><h1>resources</h1><br></br>
-                    Our resource page is filled with many tips and tools to help you chart the 
-                    course to your financial success. Explore the tools on this page including 
-                    great reads, websites, assessments and online calculators to help you in your 
-                    journey. All tools have been tested and used by the up-RIGHT family and will 
-                    provide insight on many essential financial topics.</a></td>
-                    <td><img src = {this.state.resourceImg} ></img></td>
-                   </tr>
-                    <tr class = "partners">
-                      <td><img src = {this.state.partnersImg} ></img></td>
-                      <td><a href = "/partners"><h1>partners</h1><br></br>
-                      Our Partner Programs give you an opportunity to learn more about the businesses 
-                      that align with our core values and think would benefit you. Just click on their 
-                      icon, take a look for yourself and let us know what you think.</a></td>
-                    </tr>
-                    <tr class = "live">
-                      <td><a href = "/live"><h1>live stream - chat</h1><br></br>
-                      Although we can’t be there in person to answer your questions and collaborate on ideas,
-                       we want you to be able to have real conversations with us! Our live stream/chat sessions
-                        allow for real time streaming where we can see, talk, share, and experience the power 
-                        of reaching into our up-RIGHT community.</a></td>
-                        <td><img src = {this.state.liveImg} ></img></td>
-                    </tr>
-                    <tr class = "book">
-                      <td><img src = {this.state.bookImg} ></img></td>
-                      <td><a href = "/book"><h1>book club</h1>
-                      Bell Hooks once said, “For some people, what is so painful about reading, is that you 
-                      read something, and you don’t have anyone to share it with.” Not only does our book club 
-                      offer great reading suggestions, it also includes a book of the month with a question and
-                       answer forum. Confused about something? Leave your questions and receive responses so 
-                       everyone can see. You can also log on to our live-chat question and answer sessions for 
-                       a more in-depth conversation with our up-RIGHT community!</a></td>
-                    </tr>
-                    <tr class = "blog">
-                      <td><a href = "/blog"><h1>blog</h1><br></br>
-                      Up-RIGHT is a finance site created by F. Xavier Glasper that covers many of the
-                       relevant topics and skills needed to achieve financial success. Jump in anytime 
-                       to see what is trending in our financial literacy space. We welcome your perspective 
-                       and appreciate you sharing your experiences with our up-RIGHT community.</a></td>
-                       <td><img src = {this.state.blogImg} ></img></td>
-                    </tr>
-                    <tr class = "rewards">
-                      <td><img src = {this.state.rewardsImg} ></img></td>
-                      <td><a href = "/rewards"><h1>your rewards</h1><br></br>
-                      By participating in our programs and utilizing our tools, you will automatically be 
-                      enrolled in and earn points within our up-RIGHT rewards program. </a></td>
-                    </tr>
-                    <tr class = "account">
-                      <td><a href = "/account"><h1>your account</h1><br></br>
-                      No need to panic! By creating and updating your profile, you can customize 
-                      your experience on our site to meet your needs. When you manage your account, 
-                      you can change your profile, settings, update your passwords, and even get 
-                      individualized support! Up-RIGHT is about you, for you! </a></td>
-                      <td><img src = {this.state.accountImg} ></img></td>
-                    </tr>
-              </table>
-            </div>
+            
+            {this.print_tables()}
+
             <Footer/>
           </div>
       );
@@ -240,99 +410,34 @@ class home extends React.Component {
           <Header/>          
           <div class = "imageinput">
           <label>Edit "Logo" Picture: </label><br/>
-          <input type = "file" onChange = {this.onChange}/>
+          <input type = "file" name = "logo" onChange = {this.onChange}/>
           <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.uploadHandler}>Upload!</button>
-          
           </div>
+
+          <div class = "imageinput">
+          <label>Edit "Home" Picture: </label><br/>
+          <input type = "file" name = "picture" onChange = {this.onChange}/>
+          <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.homeUploadHandler}>Upload!</button>
+          </div>
+
           <RenderImage class = "homeImg" url={this.state.homeImg}/>
           <br></br>
-          <Header1 name = "Let’s lift our knowledge up-RIGHT"/>
-          <p>“An investment in knowledge, pays the best interest” – Benjamin Franklin"</p>
+          <Header1 name = {this.state.tagTitle}/>
+            <p>{this.state.tagText}</p>
           <br></br>
-          <div>
-            <table class = "HomeTable">
-              <tr class = "modules">
-                    <td><img src = {this.state.modulesImg} ></img></td>
-                    <td><a href = "/modules"><h1>modules</h1><br></br>
-                      Our modules page contains a variety of valuable topics including financial 
-                    institutions, loans, investing and retirement. Once you find a topic of interest, 
-                    just click and access the subject that you would like to explore. We cannot wait 
-                    to share the information created in our up-RIGHT lab.</a></td>
-                  </tr>
-                  <tr class = "webinars">
-                    <td><a href = "/webinars"><h1>webinars</h1><br></br>
-                    Don’t let the stress of planning your financial future make your stomach turn. 
-                    Engage in our online presentations at your own convenience. Let us show you what, 
-                    how, and when to plan for your financial security. Our charismatic presenter will 
-                    instill confidence as you move towards your own financial success.
-                    </a></td>
-                    <td><img src = {this.state.webinarsImg} ></img></td>
-                  </tr>
-                  <tr class = "budget">
-                  <td><img src = {this.state.budgetImg} ></img></td>
-                    <td><a href = "/budget"><h1>your budget</h1><br></br>
-                    Our various budgeting tools will accommodate all stages of your life, 
-                    lifestyle, and finances. Once you create your budget based on your needs 
-                    and wants,  you can upload it and receive tips from our financial team!</a></td>
-                  </tr>
-                <tr class = "resources">
-                  <td style = {{"width":"50%"}}><a href = "/resources"><h1>resources</h1><br></br>
-                  Our resource page is filled with many tips and tools to help you chart the 
-                  course to your financial success. Explore the tools on this page including 
-                  great reads, websites, assessments and online calculators to help you in your 
-                  journey. All tools have been tested and used by the up-RIGHT family and will 
-                  provide insight on many essential financial topics.</a></td>
-                  <td><img src = {this.state.resourceImg} ></img></td>
-                  </tr>
-                  <tr class = "partners">
-                    <td><img src = {this.state.partnersImg} ></img></td>
-                    <td><a href = "/partners"><h1>partners</h1><br></br>
-                    Our Partner Programs give you an opportunity to learn more about the businesses 
-                    that align with our core values and think would benefit you. Just click on their 
-                    icon, take a look for yourself and let us know what you think.</a></td>
-                  </tr>
-                  <tr class = "live">
-                    <td><a href = "/live"><h1>live stream - chat</h1><br></br>
-                    Although we can’t be there in person to answer your questions and collaborate on ideas,
-                      we want you to be able to have real conversations with us! Our live stream/chat sessions
-                      allow for real time streaming where we can see, talk, share, and experience the power 
-                      of reaching into our up-RIGHT community.</a></td>
-                      <td><img src = {this.state.liveImg} ></img></td>
-                  </tr>
-                  <tr class = "book">
-                    <td><img src = {this.state.bookImg} ></img></td>
-                    <td><a href = "/book"><h1>book club</h1>
-                    Bell Hooks once said, “For some people, what is so painful about reading, is that you 
-                    read something, and you don’t have anyone to share it with.” Not only does our book club 
-                    offer great reading suggestions, it also includes a book of the month with a question and
-                      answer forum. Confused about something? Leave your questions and receive responses so 
-                      everyone can see. You can also log on to our live-chat question and answer sessions for 
-                      a more in-depth conversation with our up-RIGHT community!</a></td>
-                  </tr>
-                  <tr class = "blog">
-                    <td><a href = "/blog"><h1>blog</h1><br></br>
-                    Up-RIGHT is a finance site created by F. Xavier Glasper that covers many of the
-                      relevant topics and skills needed to achieve financial success. Jump in anytime 
-                      to see what is trending in our financial literacy space. We welcome your perspective 
-                      and appreciate you sharing your experiences with our up-RIGHT community.</a></td>
-                      <td><img src = {this.state.blogImg} ></img></td>
-                  </tr>
-                  <tr class = "rewards">
-                    <td><img src = {this.state.rewardsImg} ></img></td>
-                    <td><a href = "/rewards"><h1>your rewards</h1><br></br>
-                    By participating in our programs and utilizing our tools, you will automatically be 
-                    enrolled in and earn points within our up-RIGHT rewards program. </a></td>
-                  </tr>
-                  <tr class = "account">
-                    <td><a href = "/account"><h1>your account</h1><br></br>
-                    No need to panic! By creating and updating your profile, you can customize 
-                    your experience on our site to meet your needs. When you manage your account, 
-                    you can change your profile, settings, update your passwords, and even get 
-                    individualized support! Up-RIGHT is about you, for you! </a></td>
-                    <td><img src = {this.state.accountImg} ></img></td>
-                  </tr>
-            </table>
+
+          <div class = "imageinput">
+          <label>Edit Tagline Text: </label><br/>
+          <textarea type = "input" name = "tagTitle" onChange = {this.onTextChange}/>
+          <br/>
+          <label>Edit Quote Text: </label><br/>
+          <textarea type = "input" name = "tagText" onChange = {this.onTextChange}/>
+          <br/><br/>
+          <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.TagUploadHandler}>Upload!</button>
           </div>
+
+          {this.admin_tables()}
+
           <Footer/>
         </div>
       );
@@ -340,6 +445,272 @@ class home extends React.Component {
     else {
       return (<p>loading</p>);
     }
+  }
+  print_tables = () => {
+    return (
+      <div>
+      <table class = "HomeTable">
+        <tr class = "modules">
+              <td><img src = {this.state.modulesImg} ></img></td>
+              <td><a href = "/modules"><h1>modules</h1><br></br>
+                {this.state.moduleDesc}
+                </a></td>
+            </tr>
+            <tr class = "webinars">
+              <td><a href = "/webinars"><h1>webinars</h1><br></br>
+              {this.state.webinarDesc}
+              </a></td>
+              <td><img src = {this.state.webinarsImg} ></img></td>
+            </tr>
+            <tr class = "budget">
+            <td><img src = {this.state.budgetImg} ></img></td>
+              <td><a href = "/budget"><h1>your budget</h1><br></br>
+              {this.state.budgetDesc}
+              </a></td>
+            </tr>
+          <tr class = "resources">
+            <td style = {{"width":"50%"}}><a href = "/resources"><h1>resources</h1><br></br>
+            {this.state.resourceDesc}
+            </a></td>
+            <td><img src = {this.state.resourceImg} ></img></td>
+            </tr>
+            <tr class = "partners">
+              <td><img src = {this.state.partnersImg} ></img></td>
+              <td><a href = "/partners"><h1>partners</h1><br></br>
+              {this.state.partnersDesc}
+              </a></td>
+            </tr>
+            <tr class = "live">
+              <td><a href = "/live"><h1>live stream - chat</h1><br></br>
+              {this.state.liveDesc}
+              </a></td>
+                <td><img src = {this.state.liveImg} ></img></td>
+            </tr>
+            <tr class = "book">
+              <td><img src = {this.state.bookImg} ></img></td>
+              <td><a href = "/book"><h1>book club</h1>
+              {this.state.bookDesc}
+              </a></td>
+            </tr>
+            <tr class = "blog">
+              <td><a href = "/blog"><h1>blog</h1><br></br>
+              {this.state.blogDesc}
+              </a></td>
+                <td><img src = {this.state.blogImg} ></img></td>
+            </tr>
+            <tr class = "rewards">
+              <td><img src = {this.state.rewardsImg} ></img></td>
+              <td><a href = "/rewards"><h1>your rewards</h1><br></br>
+              {this.state.rewardsDesc}
+              </a></td>
+            </tr>
+            <tr class = "account">
+              <td><a href = "/account"><h1>your account</h1><br></br>
+              {this.state.accountDesc}
+              </a></td>
+              <td><img src = {this.state.accountImg} ></img></td>
+            </tr>
+      </table>
+    </div>
+    );
+  }
+  admin_tables = () => {
+    return (
+      <div>
+      <table class = "HomeTable">
+        <tr class = "modules">
+          <td><img src = {this.state.modulesImg} ></img></td>
+          <td><a href = "/modules"><h1>modules</h1><br></br>
+            {this.state.moduleDesc}
+          </a></td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>
+            <div class = "imageinput">
+              <label>Edit Module Text: </label><br/>
+              <textarea type = "input" name = "moduleDesc" onChange = {this.onTextChange}/>
+              <br/><br/>
+              <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.ModuleUploadHandler}>Upload!</button>
+            </div>
+          </td>
+        </tr>
+
+        <tr class = "webinars">
+          <td><a href = "/webinars"><h1>webinars</h1><br></br>
+            {this.state.webinarDesc}
+          </a></td>
+          <td><img src = {this.state.webinarsImg} ></img></td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class = "imageinput">
+              <label>Edit Webinars Text: </label><br/>
+              <textarea type = "input" name = "webinarDesc" onChange = {this.onTextChange}/>
+              <br/><br/>
+              <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.WebinarUploadHandler}>Upload!</button>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr class = "budget">
+          <td><img src = {this.state.budgetImg} ></img></td>
+            <td><a href = "/budget"><h1>your budget</h1><br></br>
+              {this.state.budgetDesc}
+            </a></td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>
+            <div class = "imageinput">
+              <label>Edit Budget Text: </label><br/>
+              <textarea type = "input" name = "budgetDesc" onChange = {this.onTextChange}/>
+              <br/><br/>
+              <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.BudgetUploadHandler}>Upload!</button>
+            </div>
+          </td>
+        </tr>
+
+        <tr class = "resources">
+          <td style = {{"width":"50%"}}><a href = "/resources"><h1>resources</h1><br></br>
+            {this.state.resourceDesc}
+          </a></td>
+          <td><img src = {this.state.resourceImg} ></img></td>
+        </tr>
+        
+        <tr>
+          <td>
+            <div class = "imageinput">
+              <label>Edit Resources Text: </label><br/>
+              <textarea type = "input" name = "resourceDesc" onChange = {this.onTextChange}/>
+              <br/><br/>
+              <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.ResourceUploadHandler}>Upload!</button>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr class = "partners">
+          <td><img src = {this.state.partnersImg} ></img></td>
+          <td><a href = "/partners"><h1>partners</h1><br></br>
+            {this.state.partnersDesc}
+          </a></td>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td>
+            <div class = "imageinput">
+              <label>Edit Partners Text: </label><br/>
+              <textarea type = "input" name = "partnersDesc" onChange = {this.onTextChange}/>
+              <br/><br/>
+              <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.PartnersUploadHandler}>Upload!</button>
+            </div>
+          </td>
+        </tr>
+
+        <tr class = "live">
+          <td><a href = "/live"><h1>live stream - chat</h1><br></br>
+            {this.state.liveDesc}
+          </a></td>
+            <td><img src = {this.state.liveImg} ></img></td>
+        </tr>
+        
+        <tr>
+          <td>
+            <div class = "imageinput">
+              <label>Edit Live Stream Text: </label><br/>
+              <textarea type = "input" name = "liveDesc" onChange = {this.onTextChange}/>
+              <br/><br/>
+              <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.LiveUploadHandler}>Upload!</button>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr class = "book">
+          <td><img src = {this.state.bookImg} ></img></td>
+          <td><a href = "/book"><h1>book club</h1>
+            {this.state.bookDesc}
+          </a></td>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td>
+            <div class = "imageinput">
+              <label>Edit Book Text: </label><br/>
+              <textarea type = "input" name = "bookDesc" onChange = {this.onTextChange}/>
+              <br/><br/>
+              <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.BookUploadHandler}>Upload!</button>
+            </div>
+          </td>
+        </tr>
+
+        <tr class = "blog">
+          <td><a href = "/blog"><h1>blog</h1><br></br>
+            {this.state.blogDesc}
+          </a></td>
+            <td><img src = {this.state.blogImg} ></img></td>
+        </tr>
+        
+        <tr>
+          <td>
+            <div class = "imageinput">
+              <label>Edit Blog Text: </label><br/>
+              <textarea type = "input" name = "blogDesc" onChange = {this.onTextChange}/>
+              <br/><br/>
+              <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.BlogUploadHandler}>Upload!</button>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr class = "rewards">
+          <td><img src = {this.state.rewardsImg} ></img></td>
+          <td><a href = "/rewards"><h1>your rewards</h1><br></br>
+            {this.state.rewardsDesc}
+          </a></td>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td>
+            <div class = "imageinput">
+              <label>Edit Rewards Text: </label><br/>
+              <textarea type = "input" name = "rewardsDesc" onChange = {this.onTextChange}/>
+              <br/><br/>
+              <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.RewardsUploadHandler}>Upload!</button>
+            </div>
+          </td>
+        </tr>
+
+        <tr class = "account">
+          <td><a href = "/account"><h1>your account</h1><br></br>
+            {this.state.accountDesc}
+          </a></td>
+          <td><img src = {this.state.accountImg} ></img></td>
+        </tr>
+        
+        <tr>
+          <td>
+            <div class = "imageinput">
+              <label>Edit Account Text: </label><br/>
+              <textarea type = "input" name = "accountDesc" onChange = {this.onTextChange}/>
+              <br/><br/>
+              <button class="btn text-uppercase mb-3" style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}} onClick={this.AccountUploadHandler}>Upload!</button>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+        
+      </table>
+    </div>
+    );
   }
 } 
 
