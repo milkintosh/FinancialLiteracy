@@ -141,52 +141,62 @@ class home extends React.Component {
     resourceText.get().then(doc => {
       let item = doc.data();
       // Insert url into an <img> tag to "download"
-      this.setState({resourceDesc:item["text"]});    
+      this.setState({resourceDesc:item["text"]});  
+      this.setState({resourceState:item["toggled"]});  
     }).then(
     webinarText.get().then(doc => {
       let item = doc.data();
       // Insert url into an <img> tag to "download"
-      this.setState({webinarDesc:item["text"]});    
+      this.setState({webinarDesc:item["text"]});  
+      this.setState({webinarState:item["toggled"]});   
     }).then(
     moduleText.get().then(doc => {
       let item = doc.data();
       // Insert url into an <img> tag to "download"
-      this.setState({moduleDesc:item["text"]});    
+      this.setState({moduleDesc:item["text"]});   
+      this.setState({moduleState:item["toggled"]});  
     }).then(
     partnersText.get().then(doc => {
       let item = doc.data();
       // Insert url into an <img> tag to "download"
-      this.setState({partnersDesc:item["text"]});    
+      this.setState({partnersDesc:item["text"]});  
+      this.setState({partnersState:item["toggled"]});   
     }).then(
     budgetText.get().then(doc => {
       let item = doc.data();
       // Insert url into an <img> tag to "download"
-      this.setState({budgetDesc:item["text"]});    
+      this.setState({budgetDesc:item["text"]});   
+      this.setState({budgetState:item["toggled"]});  
     }).then(
     accountText.get().then(doc => {
       let item = doc.data();
       // Insert url into an <img> tag to "download"
-      this.setState({accountDesc:item["text"]});    
+      this.setState({accountDesc:item["text"]});  
+      this.setState({accountState:item["toggled"]});   
     }).then(
     blogText.get().then(doc => {
       let item = doc.data();
       // Insert url into an <img> tag to "download"
-      this.setState({blogDesc:item["text"]});    
+      this.setState({blogDesc:item["text"]});   
+      this.setState({blogState:item["toggled"]});  
     }).then(
     liveText.get().then(doc => {
       let item = doc.data();
       // Insert url into an <img> tag to "download"
-      this.setState({liveDesc:item["text"]});    
+      this.setState({liveDesc:item["text"]});  
+      this.setState({liveState:item["toggled"]});   
     }).then(
     bookText.get().then(doc => {
       let item = doc.data();
       // Insert url into an <img> tag to "download"
       this.setState({bookDesc:item["text"]});    
+      this.setState({bookState:item["toggled"]}); 
     }).then(
     rewardsText.get().then(doc => {
       let item = doc.data();
       // Insert url into an <img> tag to "download"
       this.setState({rewardsDesc:item["text"]});    
+      this.setState({rewardsState:item["toggled"]}); 
     }))))))))))));
   }
 
@@ -450,66 +460,86 @@ class home extends React.Component {
     return (
       <div>
       <table class = "HomeTable">
-        <tr class = "modules">
+        {this.state.moduleState &&
+            <tr class = "modules">
               <td><img src = {this.state.modulesImg} ></img></td>
               <td><a href = "/modules"><h1>modules</h1><br></br>
                 {this.state.moduleDesc}
                 </a></td>
             </tr>
+        }
+        {this.state.webinarState &&
             <tr class = "webinars">
               <td><a href = "/webinars"><h1>webinars</h1><br></br>
               {this.state.webinarDesc}
               </a></td>
               <td><img src = {this.state.webinarsImg} ></img></td>
-            </tr>
+            </tr> 
+        }
+        {this.state.budgetState &&
             <tr class = "budget">
             <td><img src = {this.state.budgetImg} ></img></td>
               <td><a href = "/budget"><h1>your budget</h1><br></br>
               {this.state.budgetDesc}
               </a></td>
             </tr>
+        }
+        {this.state.resourceState &&
           <tr class = "resources">
             <td style = {{"width":"50%"}}><a href = "/resources"><h1>resources</h1><br></br>
             {this.state.resourceDesc}
             </a></td>
             <td><img src = {this.state.resourceImg} ></img></td>
             </tr>
+        }
+        {this.state.partnersState &&
             <tr class = "partners">
               <td><img src = {this.state.partnersImg} ></img></td>
               <td><a href = "/partners"><h1>partners</h1><br></br>
               {this.state.partnersDesc}
               </a></td>
             </tr>
+        }
+        {this.state.liveState &&
             <tr class = "live">
               <td><a href = "/live"><h1>live stream - chat</h1><br></br>
               {this.state.liveDesc}
               </a></td>
                 <td><img src = {this.state.liveImg} ></img></td>
             </tr>
+        }
+        {this.state.bookState &&
             <tr class = "book">
               <td><img src = {this.state.bookImg} ></img></td>
               <td><a href = "/book"><h1>book club</h1>
               {this.state.bookDesc}
               </a></td>
             </tr>
+        }
+        {this.state.blogState &&
             <tr class = "blog">
               <td><a href = "/blog"><h1>blog</h1><br></br>
               {this.state.blogDesc}
               </a></td>
                 <td><img src = {this.state.blogImg} ></img></td>
             </tr>
+        }
+        {this.state.rewardsState &&
             <tr class = "rewards">
               <td><img src = {this.state.rewardsImg} ></img></td>
               <td><a href = "/rewards"><h1>your rewards</h1><br></br>
               {this.state.rewardsDesc}
               </a></td>
             </tr>
+        }
+        {this.state.accountState &&
             <tr class = "account">
               <td><a href = "/account"><h1>your account</h1><br></br>
               {this.state.accountDesc}
               </a></td>
               <td><img src = {this.state.accountImg} ></img></td>
             </tr>
+        }
       </table>
     </div>
     );
