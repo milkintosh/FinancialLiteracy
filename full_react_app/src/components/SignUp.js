@@ -5,6 +5,7 @@ import {auth, firestore} from './Firebase/firebase';
 import {storageRef} from './Firebase/firebase';
 
 var signUpRef = storageRef.child('home2.jpg');
+var logoRef = storageRef.child('Logo.png');
 
 function checkUserFullName(){
     var userSurname = document.getElementById("userFullName");
@@ -127,62 +128,60 @@ function signUp(){
                     last: userSurname,
                     email:userEmail,
                     rewards:0,
-                    comment:"",
-                    admincomment:"",
-                    wages: ["value", "value"],
-                    bonus: ["value", "value"],
-                    commission: ["value", "value"],
-                    reimbursements: ["value", "value"],
-                    "alimony income": ["value", "value"],
-                    "401k": ["value", "value"],
-                    medical: ["value", "value"],
-                    dental: ["value", "value"],
-                    vision: ["value", "value"],
-                    "health savings (hsa)": ["value", "value"],
-                    "emergency fund": ["value", "value"],
-                    investments: ["value", "value"],
-                    ira: ["value", "value"],
-                    vacation: ["value", "value"],
-                    gifts: ["value", "value"],
-                    groceries: ["value", "value"],
-                    "dining out": ["value", "value"],
-                    rent: ["value", "value"],
-                    "real estate": ["value", "value"],
-                    insurance: ["value", "value"],
-                    "home maintenance": ["value", "value"],
-                    security: ["value", "value"],
-                    water: ["value", "value"],
-                    gas: ["value", "value"],
-                    electric: ["value", "value"],
-                    sewer: ["value", "value"],
-                    trash: ["value", "value"],
-                    phone: ["value", "value"],
-                    internet: ["value", "value"],
-                    cable: ["value", "value"],
-                    "music and books": ["value", "value"],
-                    credit: ["value", "value"],
-                    "store cards": ["value", "value"],
-                    "student loans": ["value", "value"],
-                    "business expenses": ["value", "value"],
-                    "vet bills": ["value", "value"],
-                    "alimony debt": ["value", "value"],
-                    "auto payment": ["value", "value"],
-                    "auto insurance": ["value", "value"],
-                    gasoline: ["value", "value"],
-                    maintenance: ["value", "value"],
-                    "parking and tolls": ["value", "value"],
-                    clothing: ["value", "value"],
-                    laundry: ["value", "value"],
-                    vitamins: ["value", "value"],
-                    memberships: ["value", "value"],
-                    prescriptions: ["value", "value"],
-                    recreation: ["value", "value"],
-                    "hair and nails": ["value", "value"],
-                    term: ["value", "value"],
-                    permanent: ["value", "value"],
-                    "long-term care": ["value", "value"],
-                    "total income": ["value", "value"],
-                    "total expenses": ["value", "value"]
+                    comment:"enter your comment",
+                    admincomment:"we will respond to you whenever we can",
+                    wages: ["enter value", "enter value"],
+                    bonus: ["enter value", "enter value"],
+                    commission: ["enter value", "enter value"],
+                    reimbursements: ["enter value", "enter value"],
+                    "alimony income": ["enter value", "enter value"],
+                    "401k": ["enter value", "enter value"],
+                    medical: ["enter value", "enter value"],
+                    dental: ["enter value", "enter value"],
+                    vision: ["enter value", "enter value"],
+                    "health savings (hsa)": ["enter value", "enter value"],
+                    "emergency fund": ["enter value", "enter value"],
+                    investments: ["enter value", "enter value"],
+                    ira: ["enter value", "enter value"],
+                    vacation: ["enter value", "enter value"],
+                    gifts: ["enter value", "enter value"],
+                    groceries: ["enter value", "enter value"],
+                    "dining out": ["enter value", "enter value"],
+                    rent: ["enter value", "enter value"],
+                    "real estate": ["enter value", "enter value"],
+                    insurance: ["enter value", "enter value"],
+                    "home maintenance": ["enter value", "enter value"],
+                    security: ["enter value", "enter vvalue"],
+                    water: ["enter value", "enter value"],
+                    gas: ["enter value", "enter value"],
+                    electric: ["enter value", "enter value"],
+                    sewer: ["enter value", "enter value"],
+                    trash: ["enter value", "enter value"],
+                    phone: ["enter value", "enter value"],
+                    internet: ["enter value", "enter value"],
+                    cable: ["enter value", "enter value"],
+                    "music and books": ["enter value", "enter value"],
+                    credit: ["enter value", "enter value"],
+                    "store cards": ["enter value", "enter value"],
+                    "student loans": ["enter value", "enter value"],
+                    "business expenses": ["enter value", "enter value"],
+                    "vet bills": ["enter value", "enter value"],
+                    "alimony debt": ["enter value", "enter value"],
+                    "auto payment": ["enter value", "enter value"],
+                    "auto insurance": ["enter value", "enter value"],
+                    gasoline: ["enter value", "enter value"],
+                    maintenance: ["enter value", "enter value"],
+                    "parking and tolls": ["enter value", "enter value"],
+                    clothing: ["enter value", "enter value"],
+                    laundry: ["enter value", "enter value"],
+                    vitamins: ["enter value", "enter value"],
+                    memberships: ["enter value", "enter value"],
+                    prescriptions: ["enter value", "enter value"],
+                    recreation: ["enter value", "enter value"],
+                    "hair and nails": ["enter value", "enter value"],
+                    term: ["enter value", "enter value"],
+                    permanent: ["enter value", "enter value"],
+                    "long-term care": ["enter value", "enter value"]
                 }, { merge: true 
                 })
                 .then(function(docRef) {
@@ -216,23 +215,35 @@ class signup extends React.Component {
     constructor(props) {
         super(props);
         this.state = { name: '', surname: '', isLoading:true,
-        home:null
+        home:null,
+        Logo:null,
       }
     }
     getData = () => {
       return signUpRef.getDownloadURL().then(url => {
         // Insert url into an <img> tag to "download"
-        this.setState({home:url});    
+        this.setState({home:url});
       }).catch(function(error) {
             console.log("error occurred");
         });
     }
   
+    getLogo = () => {
+        return logoRef.getDownloadURL().then(url => {
+              // Insert url into an <img> tag to "download"
+              this.setState({Logo:url});   
+        }).catch(function(error) {
+              console.log("error occurred");
+          });
+      }
+    
+
     componentDidMount(){
       this.setState({isLoading:true});
       this.getData().then(() => {
+      this.getLogo().then(() => {
       this.setState({isLoading:false});
-      });
+      });});
     }
     handleChange = ({target})=>  {
         this.setState({[target.name]: target.value});
@@ -243,9 +254,10 @@ class signup extends React.Component {
         <body class="bg-light">
             <div class="container-fluid">
                 <div class="row mx-1">
-                    <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 text-center mt-5 pb-4">
-                        <h1 class="h1">welcome to up-RIGHT</h1>
-                    </div>
+                <header className="logoTitle">
+                        <img className = "logoImg" src={this.state.Logo}/>
+                        <h1 style = {{"margin-top":"5%"}} className="Site">welcome to up-RIGHT</h1>
+                </header>
                     <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 bg-white shadow mb-5 border">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 p-4 divCover" style = {{"background-color":"#d8f3fa"}}>

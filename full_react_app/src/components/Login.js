@@ -5,6 +5,7 @@ import {auth} from './Firebase/firebase'
 import {storageRef} from './Firebase/firebase';
 
 var loginRef = storageRef.child('home2.jpg');
+var logoRef = storageRef.child('Logo.png');
 
 // xxxxxxxxxx Working For Sign Up Form xxxxxxxxxx
 // xxxxxxxxxx Full Name Validation xxxxxxxxxx
@@ -194,11 +195,21 @@ constructor(props) {
       });
   }
 
+  getLogo = () => {
+    return logoRef.getDownloadURL().then(url => {
+          // Insert url into an <img> tag to "download"
+          this.setState({Logo:url});   
+    }).catch(function(error) {
+          console.log("error occurred");
+      });
+  }
+
   componentDidMount(){
     this.setState({isLoading:true});
     this.getData().then(() => {
+    this.getLogo().then(() => {
     this.setState({isLoading:false});
-    });
+    });});
   }
 
 handleChange = ({target})=>  {
@@ -210,9 +221,10 @@ handleChange = ({target})=>  {
 <body class="bg-light">
     <div class="container-fluid">
         <div class="row mx-1">
-            <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 text-center mt-5 pb-4">
-            <h1 class="h1" style = {{"color":"#2dd2f4", "font-weight":"bold"}}>welcome to up-RIGHT</h1>
-            </div>
+            <header className="logoTitle">
+                        <img className = "logoImg" src={this.state.Logo}/>
+                        <h1 style = {{"margin-top":"5%"}} className="Site">welcome to up-RIGHT</h1>
+                </header>
             <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 shadow mb-5 border">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 p-4 divCover" style = {{"background-color":"#d8f3fa"}}>
