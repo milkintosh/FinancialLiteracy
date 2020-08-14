@@ -829,8 +829,8 @@ render (){
         <br></br>
         <BootstrapTable data={ monthly } cellEdit = {cellEditProp}>
           <TableHeaderColumn dataField='income' isKey>Monthly Cash flow</TableHeaderColumn>
-          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
-          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated' editable={ false }>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual' editable={ false }>Actual</TableHeaderColumn>
           <TableHeaderColumn dataField='delta' editable={ false }>Delta</TableHeaderColumn>
         </BootstrapTable>
         <br></br>
@@ -846,79 +846,79 @@ render (){
         <div class = "budget_table">
         <BootstrapTable data={ income }>
           <TableHeaderColumn dataField='income' isKey>Income</TableHeaderColumn>
-          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
-          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
-          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated' editable={ false }>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual' editable={ false }>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta' editable={ false }>Delta</TableHeaderColumn>
         </BootstrapTable>
         <br></br>
         <BootstrapTable data={ benefits }>
           <TableHeaderColumn dataField='income' isKey>Benefits</TableHeaderColumn>
-          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
-          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
-          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated' editable={ false }>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual' editable={ false }>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta' editable={ false }>Delta</TableHeaderColumn>
         </BootstrapTable>
         <br></br>
         <BootstrapTable data={ savings }>
           <TableHeaderColumn dataField='income' isKey>Savings</TableHeaderColumn>
-          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
-          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
-          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated' editable={ false }>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual' editable={ false }>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta' editable={ false }>Delta</TableHeaderColumn>
         </BootstrapTable>
         <br></br>
         <BootstrapTable data={ food }>
           <TableHeaderColumn dataField='income' isKey>Food</TableHeaderColumn>
-          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
-          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
-          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated' editable={ false }>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual' editable={ false }>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta' editable={ false }>Delta</TableHeaderColumn>
         </BootstrapTable>
         <br></br>
         <BootstrapTable data={ housing }>
           <TableHeaderColumn dataField='income' isKey>Housing</TableHeaderColumn>
-          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
-          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
-          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated' editable={ false }>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual' editable={ false }>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta' editable={ false }>Delta</TableHeaderColumn>
         </BootstrapTable>
         <br></br>
         <BootstrapTable data={ utilities }>
           <TableHeaderColumn dataField='income' isKey>Utilities</TableHeaderColumn>
-          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
-          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
-          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated' editable={ false }>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual' editable={ false }>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta' editable={ false }>Delta</TableHeaderColumn>
         </BootstrapTable>
         <br></br>
         <BootstrapTable data={ debts }>
           <TableHeaderColumn dataField='income' isKey>Debt</TableHeaderColumn>
-          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
-          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
-          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated' editable={ false }>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual' editable={ false }>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta' editable={ false }>Delta</TableHeaderColumn>
         </BootstrapTable>
         <br></br>
         <BootstrapTable data={ transportation }>
           <TableHeaderColumn dataField='income' isKey>Transportation</TableHeaderColumn>
-          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
-          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
-          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated' editable={ false }>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual' editable={ false }>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta' editable={ false }>Delta</TableHeaderColumn>
         </BootstrapTable>
         <br></br>
         <BootstrapTable data={ personal }>
           <TableHeaderColumn dataField='income' isKey>Personal</TableHeaderColumn>
-          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
-          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
-          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated' editable={ false }>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual' editable={ false }>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta' editable={ false }>Delta</TableHeaderColumn>
         </BootstrapTable>
         <br></br>
         <BootstrapTable data={ lifeinsurance }>
           <TableHeaderColumn dataField='income' isKey>Life Insurance</TableHeaderColumn>
-          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
-          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
-          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated' editable={ false }>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual' editable={ false }>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta' editable={ false }>Delta</TableHeaderColumn>
         </BootstrapTable>
         <br></br>
         <BootstrapTable data={ monthly }>
           <TableHeaderColumn dataField='income' isKey>Monthly Cash flow</TableHeaderColumn>
-          <TableHeaderColumn dataField='estimated'>Estimated</TableHeaderColumn>
-          <TableHeaderColumn dataField='actual'>Actual</TableHeaderColumn>
-          <TableHeaderColumn dataField='delta'>Delta</TableHeaderColumn>
+          <TableHeaderColumn dataField='estimated' editable={ false }>Estimated</TableHeaderColumn>
+          <TableHeaderColumn dataField='actual' editable={ false }>Actual</TableHeaderColumn>
+          <TableHeaderColumn dataField='delta' editable={ false }>Delta</TableHeaderColumn>
         </BootstrapTable>
         <br></br>
         </div>
