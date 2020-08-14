@@ -102,8 +102,8 @@ class contact extends React.Component {
           <Header/>
           <hr></hr>
           <Header1 name = "Contact Us"/>
-          <p>email: leila@email.com<br></br>
-             phone: 555-0151</p>
+          <p>{this.state.email}<br></br>
+            {this.state.phone}</p>
           <Footer/>
         </div>
       );

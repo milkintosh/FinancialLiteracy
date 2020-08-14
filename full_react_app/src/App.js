@@ -15,6 +15,7 @@ import Resource from './components/Resources';
 import Webinar from './components/Webinars';
 import Search from './components/Search';
 import Login from './components/Login';
+import reset from './components/resetPassword';
 import Signup from './components/SignUp';
 import Landing from './components/Landing';
 import About from './components/About';
@@ -23,6 +24,7 @@ import Book from './components/Book';
 import Blog from './components/Blog';
 import Live from './components/Live';
 import Rewards from './components/Rewards';
+
 
 import PrivateRoute from './components/PrivateRoute';
 
@@ -110,6 +112,7 @@ class App extends React.Component {
             <Switch>
             <Route path="/" component={Landing} exact/> 
               <Route path="/login" component={Login}/> 
+              <Route path="/reset" component={reset}/> 
               <Route path="/signup" component={Signup}/> 
               <Route path="/landing" component={Landing}/> 
               <Route path="/about" component={About}/> 

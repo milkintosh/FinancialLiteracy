@@ -82,7 +82,7 @@ function signIn(){
             localStorage.setItem("userId", auth.currentUser.uid);
             localStorage.setItem("user", null);
             swal.fire({
-                type: 'successfull',
+                type: 'success',
                 title: 'Succesfully signed in', 
             }).then((value) => {
                 setTimeout(function(){
@@ -244,6 +244,7 @@ handleChange = ({target})=>  {
                         </div>
                         <button class="btn text-uppercase mb-3" onClick = { () => {signIn()}} style = {{"color":"#2dd2f4", "border-color":"#2dd2f4"}}>Sign In</button>
                         <p>Not a member? Let's get started: <a href="/signup"><strong class="text-uppercase showSignUpForm" style = {{"color":"#2dd2f4"}}>Sign Up</strong></a></p>
+                        <p>Forgot your password? Reset here: <a href="/reset"><strong class="text-uppercase showSignUpForm" style = {{"color":"#2dd2f4"}}>Reset</strong></a></p>
                     </div>
                 </div>
             </div>

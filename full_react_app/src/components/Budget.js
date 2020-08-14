@@ -70,29 +70,8 @@ function onAfterSaveCell(row, cellName, cellValue) {
       let item = doc.data();
       //we ge the item from the table and set the respective value in the database
       if(comment == null) {
-        item[income] = [estimated, actual];
-        if(income == "wages" || income == "bonus" || income == "commission" ||
-        income == "reimbursements" || income == "alimony income" || income == "401k"
-        || income == "medical" || income == "dental" || income == "vision" ||
-        income == "health savings (hsa)" || income == "emergency fund" || income == "investments" ||
-        income == "ira" || income == "vacation" || income == "gifts") {
-          if(cellName == "estimated") {
-          console.log("saved cell");
-            item["total income"][0] += Number(estimated);
-          }
-          else if(cellName == "actual") {
-            item["total income"][1] += Number(actual);
-          }
-        }
-        else {
-          if(cellName == "estimated") {
-            console.log("saved cell");
-              item["total expenses"][0] += Number(estimated);
-            }
-            else if(cellName == "actual") {
-              item["total expenses"][1] += Number(actual);
-            }
-        }
+        item[income][0] = Number(estimated);
+        item[income][1] = Number(actual); 
       }
       if(comment != null)
         item["comment"] = comment;
