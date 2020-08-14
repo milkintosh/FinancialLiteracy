@@ -3,7 +3,7 @@ import "firebase/firestore";
 import 'firebase/storage';
 import app from 'firebase/app';
 
-
+//this is intentionally the wrong config information, need the information from the correct firebase in order to work.
 var firebaseConfig = {
   apiKey: "AIzaSyBdjeWpgPaqht7uOIqoR8AVXfq6nThe2Qc",
   authDomain: "myfirebase-4ae89.firebaseapp.com",
